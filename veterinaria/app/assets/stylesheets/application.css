@@ -13,5 +13,6 @@
  *= require bootstrap_and_overrides
  *= require sb-admin-2
  *= require timeline
+ *= require dataTables/jquery.dataTables
  *= require_self
  */

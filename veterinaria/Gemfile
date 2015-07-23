@@ -17,6 +17,8 @@ gem 'therubyracer' #, platforms: :ruby
 gem 'twitter-bootstrap-rails'
 # See https://rubygems.org/gems/annotate/versions/2.6.10
 gem 'annotate'
+# See https://github.com/rweng/jquery-datatables-rails
+gem 'jquery-datatables-rails', '~> 3.3.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
