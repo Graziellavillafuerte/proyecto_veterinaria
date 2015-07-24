@@ -1,0 +1,36 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  id                  :integer          not null, primary key
+#  name                :string(100)
+#  cost_price          :decimal(10, )
+#  sale_price          :decimal(10, )
+#  long_description    :string(200)
+#  observation         :text(65535)
+#  product_category_id :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  cost_price: 
+  cost_price: 
+  sale_price: 
+  sale_price: 
+  long_description: MyString
+  observation: MyText
+  product_category_id: 
+
+two:
+  name: MyString
+  cost_price: 
+  cost_price: 
+  sale_price: 
+  sale_price: 
+  long_description: MyString
+  observation: MyText
+  product_category_id: 

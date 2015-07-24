@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: citations
+#
+#  id          :integer          not null, primary key
+#  date        :date
+#  time        :time
+#  observation :text(65535)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2015-07-24
+  time: 2015-07-24 05:54:10
+  observation: MyText
+
+two:
+  date: 2015-07-24
+  time: 2015-07-24 05:54:10
+  observation: MyText

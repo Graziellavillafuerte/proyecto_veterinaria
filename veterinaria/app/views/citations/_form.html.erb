@@ -1,0 +1,45 @@
+<%= form_for @citation, :html => { :class => "form-horizontal citation" } do |f| %>
+
+    <% if @citation.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@citation.errors.count, "error") %> prohibited this citation from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @citation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :date, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :date, :class => 'form-control' %>
+    </div>
+    <%= error_span(@citation[:date]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :time, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :time, :class => 'form-control' %>
+    </div>
+    <%= error_span(@citation[:time]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :observation, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :observation, :class => 'form-control' %>
+    </div>
+    <%= error_span(@citation[:observation]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            citations_path, :class => 'btn btn-default' %>
+
+<% end %>

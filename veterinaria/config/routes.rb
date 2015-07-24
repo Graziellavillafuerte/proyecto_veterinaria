@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  resources :departments
+  resources :services
+  resources :citations
+  resources :unit_measures
+  resources :products
+  resources :product_categories
+  resources :districts
+  resources :provinces
+  resources :departments
+  resources :races
+  resources :categories
+  resources :patients
   get 'welcome/index'
 
   resources :clients

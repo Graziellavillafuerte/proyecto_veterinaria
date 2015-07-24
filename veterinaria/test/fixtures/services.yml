@@ -1,0 +1,28 @@
+# == Schema Information
+#
+# Table name: services
+#
+#  id          :integer          not null, primary key
+#  name        :string(60)
+#  price       :decimal(10, )
+#  observation :text(65535)
+#  citation_id :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  price: 
+  price: 
+  observation: MyText
+  citation_id: 
+
+two:
+  name: MyString
+  price: 
+  price: 
+  observation: MyText
+  citation_id: 

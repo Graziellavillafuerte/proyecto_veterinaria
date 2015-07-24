@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: patients
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  color      :string(255)
+#  birthday   :date
+#  sex        :string(255)
+#  weight     :decimal(10, )
+#  client_id  :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  color: MyString
+  birthday: 2015-07-24
+  sex: MyString
+  weight: 
+  client_id: 
+
+two:
+  name: MyString
+  color: MyString
+  birthday: 2015-07-24
+  sex: MyString
+  weight: 
+  client_id: 
