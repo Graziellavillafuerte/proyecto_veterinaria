@@ -65,7 +65,9 @@
     <%= error_span(@client[:email]) %>
   </div>
 
-
+  <div class="control-group">
+    <label>&nbsp;</label>
+  </div>
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             clients_path, :class => 'btn btn-default' %>
