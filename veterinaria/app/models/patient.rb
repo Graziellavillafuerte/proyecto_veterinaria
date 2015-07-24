@@ -15,4 +15,7 @@
 
 class Patient < ActiveRecord::Base
   belongs_to :client
+  
+  validates :name, :color, :birthday, :sex, :client_id, :weight, presence: true
+  
 end

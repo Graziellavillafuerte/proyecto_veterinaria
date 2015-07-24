@@ -16,4 +16,8 @@
 
 class Client < ActiveRecord::Base
     has_many :patients
+    
+    validates :name, :firstlastname, :secondlastname, :birthday, presence: true
+    validates :email, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: "correo electrónico incorrecto" }
+    
 end
