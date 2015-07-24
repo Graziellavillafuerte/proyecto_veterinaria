@@ -14,4 +14,6 @@
 class Service < ActiveRecord::Base
   has_and_belongs_to_many :citations
   #belongs_to :citation
+  
+  validates :name, :price, presence: true
 end

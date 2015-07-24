@@ -15,4 +15,8 @@
 
 class Product < ActiveRecord::Base
   belongs_to :product_category
+  validates :name, :cost_price , :sale_price,  presence: true
+  validates :name, uniqueness: true
+  
+  
 end
