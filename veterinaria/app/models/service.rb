@@ -15,5 +15,7 @@ class Service < ActiveRecord::Base
   has_and_belongs_to_many :citations
   #belongs_to :citation
   
-  validates :name, :price, presence: true
+  validates_presence_of :name, :message => '^ Ingrese el nombre del servicio.'
+  validates_presence_of :price, :message => '^ Ingrese el precio del servicio.'
+  #validates :name, :price, presence: true
 end

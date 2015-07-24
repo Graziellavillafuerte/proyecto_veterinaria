@@ -15,7 +15,11 @@
 
 class Product < ActiveRecord::Base
   belongs_to :product_category
-  validates :name, :cost_price , :sale_price,  presence: true
+  #validates :name, :cost_price , :sale_price,  presence: true
+  
+  validates_presence_of :name, :message => '^ Ingrese el nombre del producto.'
+  validates_presence_of :cost_price, :message => '^ Ingrese el precio de costo.'
+  validates_presence_of :sale_price, :message => '^ Ingrese el precio de venta'
   validates :name, uniqueness: true
   
   

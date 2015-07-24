@@ -2,7 +2,7 @@
 
 <div class="row">&nbsp;</div>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h3><B><%=t '.title', :default => 'CITAS' %></B></h3>
 </div>
 <table class="table table-striped table-bordered table-hover">
   <thead>
@@ -10,8 +10,8 @@
       <th style="text-align: center">Id</th>
       <th style="text-align: center">Fecha</th>
       <th style="text-align: center">Hora</th>
-      <th style="text-align: center">Observaciones</th>
-      <th style="text-align: center">Fecha creaci&oacute;n</th>
+      <th style="text-align: center">Paciente</th>
+      <!--<th style="text-align: center">Fecha creaci&oacute;n</th>-->
       <th style="text-align: center">Acciones</th>
     </tr>
   </thead>
@@ -21,15 +21,15 @@
         <td><%= link_to citation.id, citation_path(citation) %></td>
         <td><%= citation.date %></td>
         <td><%= citation.time %></td>
-        <td><%= citation.observation %></td>
-        <td><%=l citation.created_at %></td>
+        <td></td>
+        <!--<td><%=l citation.created_at %></td>-->
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_citation_path(citation), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       citation_path(citation),
                       :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '¿Está seguro de eliminar?')) },
                       :class => 'btn btn-xs btn-danger' %>
         </td>
       </tr>
@@ -37,6 +37,6 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<%= link_to t('.new', :default => t("NUEVO")),
             new_citation_path,
             :class => 'btn btn-primary' %>

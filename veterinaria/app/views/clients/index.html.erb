@@ -1,20 +1,17 @@
 <%- model_class = Client -%>
 <div class="row">&nbsp;</div>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h3><b><%=t '.title', :default => 'CLIENTES' %></b></h3>
 </div>
 <table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
       <th style="text-align: center">Id</th>
       <th style="text-align: center">Nombres</th>
-      <th style="text-align: center">Apellido paterno</th>
-      <th style="text-align: center">Apellido materno</th>
-      <th style="text-align: center">Fecha</br>cumpleaños</th>
+      <th style="text-align: center">Apellidos</th>
       <th style="text-align: center">Direcci&oacute;n</th>
       <th style="text-align: center">Tel&eacute;fono</th>
       <th style="text-align: center">Correo-e</th>
-      <th style="text-align: center">Fecha creaci&oacute;n</th>
       <th style="text-align: center">Acciones</th>
     </tr>
   </thead>
@@ -23,20 +20,17 @@
       <tr>
         <td><%= link_to client.id, client_path(client) %></td>
         <td><%= client.name %></td>
-        <td><%= client.firstlastname %></td>
-        <td><%= client.secondlastname %></td>
-        <td><%= client.birthday %></td>
+        <td><%= client.firstlastname %>  <%= client.secondlastname %></td>
         <td><%= client.direction %></td>
         <td><%= client.phone %></td>
         <td><%= client.email %></td>
-        <td><%=l client.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_client_path(client), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       client_path(client),
                       :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '¿Está seguro de eliminar?')) },
                       :class => 'btn btn-xs btn-danger' %>
         </td>
       </tr>
@@ -44,6 +38,6 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<%= link_to t('.new', :default => t("NUEVO")),
             new_client_path,
             :class => 'btn btn-primary' %>

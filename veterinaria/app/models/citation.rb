@@ -12,4 +12,7 @@
 
 class Citation < ActiveRecord::Base
     has_and_belongs_to_many :services
+    
+    validates_presence_of :date, :message => '^ Seleccione una fecha'
+    validates_presence_of :time, :message => '^ Seleccione una hora'
 end
