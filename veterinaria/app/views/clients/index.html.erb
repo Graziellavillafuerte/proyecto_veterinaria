@@ -26,9 +26,7 @@
         <td><%= client.phone %></td>
         <td><%= client.email %></td>
         <td align="center">
-          <div class="imagen_accion">
-           <%= link_to image_tag "error-small.png" %>
-          </div>
+
            <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_client_path(client), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

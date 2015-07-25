@@ -16,32 +16,31 @@
   <% end %>
 
   <div class="control-group">
-    <%= f.label :date, :class => 'control-label' %>
+    <%= f.label :"Fecha", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :date, :class => 'form-control' %>
     </div>
     <%= error_span(@citation[:date]) %>
   </div>
   <div class="control-group">
-    <%= f.label :time, :class => 'control-label' %>
+    <%= f.label :"Hora", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :time, :class => 'form-control' %>
     </div>
     <%= error_span(@citation[:time]) %>
   </div>
   <div class="control-group">
-    <%= f.label :observation, :class => 'control-label' %>
+    <%= f.label :"Observaciones", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :observation, :class => 'form-control' %>
     </div>
     <%= error_span(@citation[:observation]) %>
   </div>
-
+   <div class="row">&nbsp;</div>
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+  <%= link_to t('.cancel', :default => t("helpers.submit.cancel")),
             citations_path, :class => 'btn btn-default' %>
 
   
-
 <% end %>

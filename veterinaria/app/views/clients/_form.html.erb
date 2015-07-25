@@ -16,49 +16,49 @@
   <% end %>
 
   <div class="control-group">
-    <strong>Nombre</strong>
+    <%= f.label :"Nombre", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :name, :class => 'form-control' %>
     </div>
     <%= error_span(@client[:name]) %>
   </div>
   <div class="control-group">
-   <strong>Apellido Paterno</strong>
+   <%= f.label :"Apellido paterno", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :firstlastname, :class => 'form-control' %>
     </div>
     <%= error_span(@client[:firstlastname]) %>
   </div>
   <div class="control-group">
-    <strong>Apellido Materno</strong>
+    <%= f.label :"Apellido materno", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :secondlastname, :class => 'form-control' %>
     </div>
     <%= error_span(@client[:secondlastname]) %>
   </div>
   <div class="control-group">
-   <strong>Fecha de nacimiento</strong>
+   <%= f.label :"Fecha de nacimiento", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :birthday, :class => 'form-control' %>
     </div>
     <%= error_span(@client[:birthday]) %>
   </div>
   <div class="control-group">
-    <strong>Direcci&oacute;n</strong>
+    <%= f.label :"Dirección", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :direction, :class => 'form-control' %>
     </div>
     <%= error_span(@client[:direction]) %>
   </div>
   <div class="control-group">
-    <strong>Tel&eacute;fono</strong>
+    <%= f.label :"Teléfono", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :phone, :class => 'form-control' %>
     </div>
     <%= error_span(@client[:phone]) %>
   </div>
   <div class="control-group">
-    <strong>Correo-e</strong>
+    <%= f.label :"Correo-e", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :email, :class => 'form-control' %>
     </div>

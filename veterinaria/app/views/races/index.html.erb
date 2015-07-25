@@ -10,7 +10,6 @@
       <th style="text-align: center">Nombre</th>
       <th style="text-align: center">Descripción</th>
       <th style="text-align: center">Categoría</th>
-      <th style="text-align: center">Fecha de creación</th>
       <th style="text-align: center">Acciones</th>
     </tr>
   </thead>
@@ -21,8 +20,7 @@
         <td><%= race.name %></td>
         <td><%= race.description %></td>
         <td><%= race.category_id %></td>
-        <td><%=l race.created_at %></td>
-        <td>
+        <td align="center">
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_race_path(race), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
