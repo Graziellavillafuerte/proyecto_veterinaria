@@ -15,20 +15,30 @@
     </div>
   <% end %>
 
-  <div class="control-group">
-    <%= f.label :"Nombre", :class => 'control-label' %>
+ <table>
+   <tr>
+     <td>
+      <div class="control-group">
+        <%= f.label :"Nombre", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :name, :class => 'form-control' %>
     </div>
-    <%= error_span(@client[:name]) %>
-  </div>
-  <div class="control-group">
-   <%= f.label :"Apellido paterno", :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :firstlastname, :class => 'form-control' %>
-    </div>
-    <%= error_span(@client[:firstlastname]) %>
-  </div>
+      <%= error_span(@client[:name]) %>
+  </div>   
+     </td>
+     <td>
+      <div class="control-group">
+        <%= f.label :"Apellido paterno", :class => 'control-label' %>
+        <div class="controls">
+        <%= f.text_field :firstlastname, :class => 'form-control' %>
+        </div>
+        <%= error_span(@client[:firstlastname]) %>
+      </div>
+     </td>
+   </tr>
+   
+ </table>
+  
   <div class="control-group">
     <%= f.label :"Apellido materno", :class => 'control-label' %>
     <div class="controls">
