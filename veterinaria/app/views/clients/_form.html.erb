@@ -15,71 +15,77 @@
     </div>
   <% end %>
 
- <table>
-   <tr>
-     <td>
-      <div class="control-group">
-        <%= f.label :"Nombre", :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, :class => 'form-control' %>
-    </div>
-      <%= error_span(@client[:name]) %>
-  </div>   
-     </td>
-     <td>
-      <div class="control-group">
-        <%= f.label :"Apellido paterno", :class => 'control-label' %>
-        <div class="controls">
-        <%= f.text_field :firstlastname, :class => 'form-control' %>
-        </div>
-        <%= error_span(@client[:firstlastname]) %>
-      </div>
-     </td>
-   </tr>
-   
- </table>
-  
-  <div class="control-group">
-    <%= f.label :"Apellido materno", :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :secondlastname, :class => 'form-control' %>
-    </div>
-    <%= error_span(@client[:secondlastname]) %>
-  </div>
-  <div class="control-group">
-   <%= f.label :"Fecha de nacimiento", :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :birthday, :class => 'form-control' %>
-    </div>
-    <%= error_span(@client[:birthday]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :"Dirección", :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :direction, :class => 'form-control' %>
-    </div>
-    <%= error_span(@client[:direction]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :"Teléfono", :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :phone, :class => 'form-control' %>
-    </div>
-    <%= error_span(@client[:phone]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :"Correo-e", :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :email, :class => 'form-control' %>
-    </div>
-    <%= error_span(@client[:email]) %>
-  </div>
 
+  <div class="col-md-4">
+    <div class="control-group">
+      <%= f.label :"Nombre", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'form-control' %>
+      </div>
+      <%= error_span(@client[:name]) %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="control-group">
+     <%= f.label :"Apellido paterno", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :firstlastname, :class => 'form-control' %>
+      </div>
+      <%= error_span(@client[:firstlastname]) %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="control-group">
+      <%= f.label :"Apellido materno", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :secondlastname, :class => 'form-control' %>
+      </div>
+      <%= error_span(@client[:secondlastname]) %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="control-group">
+     <%= f.label :"Fecha de nacimiento", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :birthday, :class => 'form-control' %>
+      </div>
+      <%= error_span(@client[:birthday]) %>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="control-group">
+      <%= f.label :"Dirección", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :direction, :class => 'form-control' %>
+      </div>
+      <%= error_span(@client[:direction]) %>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="control-group">
+      <%= f.label :"Teléfono", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :phone, :class => 'form-control' %>
+      </div>
+      <%= error_span(@client[:phone]) %>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="control-group">
+      <%= f.label :"Correo-e", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :email, :class => 'form-control' %>
+      </div>
+      <%= error_span(@client[:email]) %>
+    </div>
+  </div>
   <div class="control-group">
     <label>&nbsp;</label>
   </div>
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.submit.cancel")),
-            clients_path, :class => 'btn btn-default' %>
-
+  <div class="col-md-6 col-sm-offset-4">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.submit.cancel")),
+              clients_path, :class => 'btn btn-default' %>
+  </div>
+  
 <% end %>
