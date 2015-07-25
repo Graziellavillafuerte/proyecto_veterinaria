@@ -15,54 +15,72 @@
     </div>
   <% end %>
 
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, :class => 'form-control' %>
+  <div class="col-md-4">
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'form-control' %>
+      </div>
+      <%= error_span(@patient[:name]) %>
     </div>
-    <%= error_span(@patient[:name]) %>
   </div>
-  <div class="control-group">
-    <%= f.label :color, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :color, :class => 'form-control' %>
+  
+  <div class="col-md-4">
+    <div class="control-group">
+      <%= f.label :color, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :color, :class => 'form-control' %>
+      </div>
+      <%= error_span(@patient[:color]) %>
     </div>
-    <%= error_span(@patient[:color]) %>
   </div>
-  <div class="control-group">
-    <%= f.label :birthday, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :birthday, :class => 'form-control' %>
+  
+  <div class="col-md-4">
+    <div class="control-group">
+      <%= f.label :birthday, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :birthday, :class => 'form-control' %>
+      </div>
+      <%= error_span(@patient[:birthday]) %>
     </div>
-    <%= error_span(@patient[:birthday]) %>
   </div>
-  <div class="control-group">
-    <%= f.label :sex, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :sex, :class => 'form-control' %>
+  
+  <div class="col-md-4">
+    <div class="control-group">
+      <%= f.label :sex, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :sex, :class => 'form-control' %>
+      </div>
+      <%= error_span(@patient[:sex]) %>
     </div>
-    <%= error_span(@patient[:sex]) %>
   </div>
-  <div class="control-group">
-    <%= f.label :weight, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :weight, :class => 'form-control' %>
+  
+  <div class="col-md-4">
+    <div class="control-group">
+      <%= f.label :weight, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :weight, :class => 'form-control' %>
+      </div>
+      <%= error_span(@patient[:weight]) %>
     </div>
-    <%= error_span(@patient[:weight]) %>
   </div>
-  <div class="control-group">
-    <%= f.label :client_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :client_id, :class => 'form-control' %>
+  
+  <div class="col-md-4">
+    <div class="control-group">
+      <%= f.label :client_id, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :client_id, :class => 'form-control' %>
+      </div>
+      <%= error_span(@patient[:client_id]) %>
     </div>
-    <%= error_span(@patient[:client_id]) %>
   </div>
 
-  <div class="control-group">
-    <label>&nbsp;</label>
+  <div class="col-md-6 col-sm-offset-4">
+    <div class="control-group">
+      <label>&nbsp;</label>
+    </div>
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.submit.cancel")),
+              patients_path, :class => 'btn btn-primary' %>
   </div>
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.submit.cancel")),
-            patients_path, :class => 'btn btn-default' %>
-
 <% end %>

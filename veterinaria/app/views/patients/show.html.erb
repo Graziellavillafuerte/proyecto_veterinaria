@@ -4,27 +4,96 @@
   <h3><b>VER PACIENTE</b></h3>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong>Nombre:</strong></dt>
-  <dd><%= @patient.name %></dd>
-  <dt><strong>Color:</strong></dt>
-  <dd><%= @patient.color %></dd>
-  <dt><strong>Fecha</br>cumplea;os:</strong></dt>
-  <dd><%= @patient.birthday %></dd>
-  <dt><strong>Sexo:</strong></dt>
-  <dd><%= @patient.sex %></dd>
-  <dt><strong>Peso:</strong></dt>
-  <dd><%= @patient.weight %></dd>
-  <dt><strong>Id Cliente:</strong></dt>
-  <dd><%= @patient.client_id %></dd>
-</dl>
+<%= form_for @patient, :html => { :class => "form-horizontal patient" } do |f| %>
 
-<%= link_to t('.back', :default => t("CERRAR")),
-              patients_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("EDITAR")),
-              edit_patient_path(@patient), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("ELIMINAR")),
+    <% if @patient.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@patient.errors.count, "error") %> prohibited this patient from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @patient.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="col-md-4">
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'form-control', :readonly => 'readonly'%>
+      </div>
+      <%= error_span(@patient[:name]) %>
+    </div>
+  </div>
+  
+  <div class="col-md-4">
+    <div class="control-group">
+      <%= f.label :color, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :color, :class => 'form-control', :readonly => 'readonly' %>
+      </div>
+      <%= error_span(@patient[:color]) %>
+    </div>
+  </div>
+  
+  <div class="col-md-4">
+    <div class="control-group">
+      <%= f.label :birthday, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :birthday, :class => 'form-control', :readonly => 'readonly' %>
+      </div>
+      <%= error_span(@patient[:birthday]) %>
+    </div>
+  </div>
+  
+  <div class="col-md-4">
+    <div class="control-group">
+      <%= f.label :sex, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :sex, :class => 'form-control', :readonly => 'readonly' %>
+      </div>
+      <%= error_span(@patient[:sex]) %>
+    </div>
+  </div>
+  
+  <div class="col-md-4">
+    <div class="control-group">
+      <%= f.label :weight, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :weight, :class => 'form-control', :readonly => 'readonly' %>
+      </div>
+      <%= error_span(@patient[:weight]) %>
+    </div>
+  </div>
+  
+  <div class="col-md-4">
+    <div class="control-group">
+      <%= f.label :client_id, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :client_id, :class => 'form-control', :readonly => 'readonly' %>
+      </div>
+      <%= error_span(@patient[:client_id]) %>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+<div class="col-md-6 col-md-offset-4">
+<%= link_to t('.back', :default => t("helpers.submit.back")),
+              patients_path, :class => 'btn btn-primary'  %>
+<%= link_to t('.edit', :default => t("helpers.submit.edit")),
+              edit_patient_path(@patient), :class => 'btn btn-primary' %>
+<%= link_to t('.destroy', :default => t("helpers.submit.destroy")),
               patient_path(@patient),
               :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Está seguro de eliminar?')) },
-              :class => 'btn btn-danger' %>
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", 
+              :default => 'Está seguro de eliminar?')) },
+              :class => 'btn btn-primary' %>
+              
+</div>

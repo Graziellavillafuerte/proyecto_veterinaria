@@ -9,11 +9,11 @@
   <dd><%= @department.name %></dd>
 </dl>
 
-<%= link_to t('.back', :default => t("CERRAR")),
+<%= link_to t('.back', :default => t("helpers.submit.back")),
               departments_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("EDITAR")),
+<%= link_to t('.edit', :default => t("helpers.submit.edit")),
               edit_department_path(@department), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("ELIMINAR")),
+<%= link_to t('.destroy', :default => t("helpers.submit.destroy")),
               department_path(@department),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
