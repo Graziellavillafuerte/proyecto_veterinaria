@@ -12,4 +12,6 @@
 
 class Race < ActiveRecord::Base
   belongs_to :category
+  
+  validates_presence_of :name, :message => '^ Ingrese la raza.'
 end

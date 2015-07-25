@@ -10,4 +10,6 @@
 #
 
 class Category < ActiveRecord::Base
+    validates_presence_of :name, :message => '^ Ingrese el nombre de la categoría.'
 end
+

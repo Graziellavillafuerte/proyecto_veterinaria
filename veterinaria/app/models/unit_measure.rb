@@ -11,4 +11,6 @@
 #
 
 class UnitMeasure < ActiveRecord::Base
+    validates_presence_of :short_name, :message => '^ Ingrese el nombre corto.'
+    validates_presence_of :cost_price, :message => '^ Ingrese el nombre.'
 end

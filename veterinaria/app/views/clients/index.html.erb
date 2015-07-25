@@ -3,6 +3,7 @@
 <div class="page-header">
   <h3><b><%=t '.title', :default => 'CLIENTES' %></b></h3>
 </div>
+
 <table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
@@ -24,8 +25,11 @@
         <td><%= client.direction %></td>
         <td><%= client.phone %></td>
         <td><%= client.email %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+        <td align="center">
+          <div class="imagen_accion">
+           <%= link_to image_tag "error-small.png" %>
+          </div>
+           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_client_path(client), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       client_path(client),
@@ -38,6 +42,6 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("NUEVO")),
+<%= link_to t('.new', :default => t("helpers.submit.new")),
             new_client_path,
             :class => 'btn btn-primary' %>

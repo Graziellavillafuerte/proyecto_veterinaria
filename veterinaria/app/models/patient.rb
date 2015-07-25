@@ -16,6 +16,10 @@
 class Patient < ActiveRecord::Base
   belongs_to :client
   
-  validates :name, :color, :birthday, :sex, :client_id, :weight, presence: true
+  #validates :name, :color, :birthday, :sex, :client_id, :weight, presence: true
+  validates_presence_of :name, :message => '^ Ingrese el nombre del paciente.'
+  validates_presence_of :color, :message => '^ Ingrese el color del paciente.'
+  validates_presence_of :birthday, :message => '^ Ingrese la fecha de nacimiento.'
+  validates_presence_of :weight, :message => '^ Ingrese el peso del paciente.'
   
 end

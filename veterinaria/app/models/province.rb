@@ -12,4 +12,6 @@
 class Province < ActiveRecord::Base
     has_many :districts
   belongs_to :department
+  
+  validates_presence_of :name, :message => '^ Ingrese el nombre de la provincia.'
 end

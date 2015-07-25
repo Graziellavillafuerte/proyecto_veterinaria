@@ -13,7 +13,7 @@
       <th style="text-align: center">Sexo</th>
       <th style="text-align: center">Peso</th>
       <th style="text-align: center">Dueño</th>
-      <th>Acciones</th>
+      <th style="text-align: center">Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -26,7 +26,7 @@
         <td><%= patient.sex %></td>
         <td><%= patient.weight %></td>
         <td></td>
-        <td>
+        <td align="center">
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_patient_path(patient), :class => 'btn btn-default btn-xs' %>
                       
@@ -43,6 +43,6 @@
 </table>
 
 
-<%= link_to t('.new', :default => t("NUEVO")),
+<%= link_to t('.new', :default => t("helpers.submit.new")),
             new_patient_path,
             :class => 'btn btn-primary' %>

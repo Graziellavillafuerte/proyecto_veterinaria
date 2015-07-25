@@ -17,7 +17,11 @@
 class Client < ActiveRecord::Base
     has_many :patients
     
-    validates :name, :firstlastname, :secondlastname, :birthday, presence: true
+    #validates :name, :firstlastname, :secondlastname, :birthday, presence: true
+    validates_presence_of :name, :message => '^ Ingrese el nombre del cliente.'
+    validates_presence_of :firstlastname, :message => '^ Ingrese apellido paterno.'
+    validates_presence_of :secondlastname, :message => '^ Ingrese apellido materno.'
+    validates_presence_of :birthday, :message => '^ Seleccione fecha de nacimiento.'
     validates :email, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: "correo electrónico incorrecto" }
     
 end

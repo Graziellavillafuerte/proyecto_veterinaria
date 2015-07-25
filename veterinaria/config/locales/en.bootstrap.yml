@@ -8,16 +8,27 @@ en:
     pages:
       pages: "Pages"
   helpers:
-    actions: "Actions"
+    actions: "Acciones"
     links:
-      back: "Back"
-      cancel: "Cancel"
-      confirm: "Are you sure?"
-      destroy: "Delete"
-      new: "New"
-      edit: "Edit"
+      back: "CERRAR"
+      cancel: "Cancelar"
+      confirm: "¿Está seguro de eliminar?"
+      destroy: "Eliminar"
+      new: "NUEVO"
+      edit: "Editar"
     titles:
-      edit: "Edit %{model}"
-      save: "Save %{model}"
-      new: "New %{model}"
-      delete: "Delete %{model}"
+      edit: "EDITAR %{model}"
+      save: "GUARDAR %{model}"
+      new: "CREAR %{model}"
+      delete: "ELIMINAR %{model}"
+    submit:
+      back: "CERRAR"
+      cancel: "CANCELAR"
+      destroy: "ELIMINAR"
+      new: "NUEVO"
+      edit: "EDITAR"
+      update: "GRABAR"
+      create: "GUARDAR"
+    label:
+      name: "Nombre"
+    
