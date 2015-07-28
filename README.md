@@ -42,6 +42,10 @@ end
 
 # en el routes.rb
 devise_for :users, :controllers => { :sessions => "sessions", :registrations => "registrations", :passwords => "passwords" }
-
 # Se crean controllers para sessions, registrations, passwords
 
+##############################
+# Envio de mails
+rails g mailer NotifierMailer
+
+# Configurar notifier_mailer.rb
