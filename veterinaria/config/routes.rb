@@ -1,23 +1,12 @@
 Rails.application.routes.draw do
-  resources :citation_details
+  devise_for :users, :controllers => { :sessions => "sessions", :registrations => "registrations", :passwords => "passwords" }
   resources :citation_details
   resources :service_details
   resources :products
   resources :unit_measures
-  resources :products
-  resources :unit_measures
-  resources :products
-  resources :products
-  resources :products
-  resources :unit_measures
-  resources :unit_measures
-  resources :unit_measures
-  resources :unit_measures
   resources :departments
   resources :services
   resources :citations
-  resources :unit_measures
-  resources :products
   resources :product_categories
   resources :districts
   resources :provinces
@@ -25,9 +14,9 @@ Rails.application.routes.draw do
   resources :races
   resources :categories
   resources :patients
+  resources :clients
   get 'welcome/index'
 
-  resources :clients
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
