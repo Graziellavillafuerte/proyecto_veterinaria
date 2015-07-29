@@ -15,54 +15,87 @@
     </div>
   <% end %>
 
+<div class="col-md-4">
   <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
+    <%= f.label :"Nombre producto", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :name, :class => 'form-control' %>
     </div>
     <%= error_span(@product[:name]) %>
   </div>
+</div>
+
+<div class="col-md-4">
   <div class="control-group">
-    <%= f.label :cost_price, :class => 'control-label' %>
+    <%= f.label :"Categoría", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :cost_price, :class => 'form-control' %>
+      <%= f.select(:product_category_id, @product_category,{:include_blank => "Selecione"}, {:class => 'form-control'}) %>
     </div>
-    <%= error_span(@product[:cost_price]) %>
+    <%= error_span(@product[:product_category_id]) %>
   </div>
+</div>
+
+<div class="col-md-4">
   <div class="control-group">
-    <%= f.label :sale_price, :class => 'control-label' %>
+    <%= f.label :"Unidad de medida", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :sale_price, :class => 'form-control' %>
+      <%= f.select(:unit_measure_id, @unit_measure, {:include_blank => "Seleccione"}, {:class => 'form-control'}) %>
     </div>
-    <%= error_span(@product[:sale_price]) %>
+    <%= error_span(@product[:name]) %>
   </div>
+</div>
+
+<div class="col-md-12">
   <div class="control-group">
-    <%= f.label :long_description, :class => 'control-label' %>
+    <%= f.label :"Descripción larga", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :long_description, :class => 'form-control' %>
     </div>
     <%= error_span(@product[:long_description]) %>
   </div>
+</div>
+
+<div class="col-md-4">
   <div class="control-group">
-    <%= f.label :observation, :class => 'control-label' %>
+    <%= f.label :"Precio costo", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :observation, :class => 'form-control' %>
+      <%= f.text_field :cost_price, :class => 'form-control' %>
+    </div>
+    <%= error_span(@product[:cost_price]) %>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="control-group">
+    <%= f.label :"Precio venta", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :sale_price, :class => 'form-control' %>
+    </div>
+    <%= error_span(@product[:sale_price]) %>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <div class="control-group">
+    <%= f.label :"Observaciones", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :observation, :class => 'form-control' %>
     </div>
     <%= error_span(@product[:observation]) %>
   </div>
-  <div class="control-group">
-    <%= f.label :product_category_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :product_category_id, :class => 'form-control' %>
-    </div>
-    <%= error_span(@product[:product_category_id]) %>
-  </div>
+</div>
 
-  <div class="control-group">
-    <label>&nbsp;</label>
-  </div>
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.submit.cancel")),
-            products_path, :class => 'btn btn-default' %>
 
+
+  <div class="row">&nbsp;
+  </div>
+  <div class="row">&nbsp;
+  </div>
+  
+  <div class="col-md-6 col-sm-offset-4">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.submit.cancel")),
+              products_path, :class => 'btn btn-primary' %>
+  </div>
+  
 <% end %>

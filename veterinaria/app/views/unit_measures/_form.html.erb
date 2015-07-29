@@ -29,17 +29,10 @@
     </div>
     <%= error_span(@unit_measure[:name]) %>
   </div>
-  <div class="control-group">
-    <%= f.label :description, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :description, :class => 'form-control' %>
-    </div>
-    <%= error_span(@unit_measure[:description]) %>
-  </div>
 
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.submit.cancel")),
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             unit_measures_path, :class => 'btn btn-default' %>
 
 <% end %>

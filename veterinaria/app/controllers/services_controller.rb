@@ -10,15 +10,21 @@ class ServicesController < ApplicationController
   # GET /services/1
   # GET /services/1.json
   def show
+    @products = Product.all
+    @service_details = ServiceDetail.all
   end
 
   # GET /services/new
   def new
     @service = Service.new
+    @product = ServiceDetail.all.map{|p| [ p.product_id] }
+    @service_details = ServiceDetail.all
   end
 
   # GET /services/1/edit
   def edit
+    
+    @service_details = ServiceDetail.all
   end
 
   # POST /services

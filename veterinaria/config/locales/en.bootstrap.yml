@@ -16,6 +16,7 @@ en:
       destroy: "Eliminar"
       new: "NUEVO"
       edit: "Editar"
+      quitar: "¿Está seguro de quitar?"
     titles:
       edit: "EDITAR %{model}"
       save: "GUARDAR %{model}"

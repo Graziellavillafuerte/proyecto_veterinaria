@@ -5,6 +5,7 @@ class PatientsController < ApplicationController
   # GET /patients.json
   def index
     @patients = Patient.all
+    #@clients = Client.select("name").find(params[:id])
   end
 
   # GET /patients/1
@@ -15,10 +16,12 @@ class PatientsController < ApplicationController
   # GET /patients/new
   def new
     @patient = Patient.new
+    @client = Client.all.map{|p| [ p.name, p.id ] }
   end
 
   # GET /patients/1/edit
   def edit
+    @client = Client.all.map{|p| [ p.name, p.id ] }
   end
 
   # POST /patients

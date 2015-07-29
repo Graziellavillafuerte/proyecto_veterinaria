@@ -47,7 +47,7 @@
     <div class="control-group">
      <%= f.label :"Fecha de nacimiento", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :birthday, :class => 'form-control' %>
+        <%= f.text_field :birthday, :class => 'form-control input-sm'%>
       </div>
       <%= error_span(@client[:birthday]) %>
     </div>
@@ -73,7 +73,8 @@
   <div class="col-md-6">
     <div class="control-group">
       <%= f.label :"Correo-e", :class => 'control-label' %>
-      <div class="controls">
+      <div class="input-group input-group-sm">
+        <span class="input-group-addon" id="sizing-addon3">@</span>
         <%= f.text_field :email, :class => 'form-control' %>
       </div>
       <%= error_span(@client[:email]) %>

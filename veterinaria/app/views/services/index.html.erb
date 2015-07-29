@@ -1,41 +1,43 @@
 <%- model_class = Service -%>
-<div class="row">&nbsp;</div>
 <div class="page-header">
   <h3><b><%=t '.title', :default => 'SERVICIOS' %></b></h3>
 </div>
 <table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
-      <th style="text-align: center">Id</th>
+      <th style="text-align: center">Id Servicio</th>
       <th style="text-align: center">Nombre</th>
       <th style="text-align: center">Precio</th>
-      <th style="text-align: center">Observaciones</th>
-      <th style="text-align: center">Citaci&oacute;n Id</th>
-      <th>Acciones</th>
+      <th style="text-align: center">Activo</th>
+      <th style="text-align: center">Acciones</th>
     </tr>
   </thead>
   <tbody>
     <% @services.each do |service| %>
       <tr>
-        <td><%= link_to service.id, service_path(service) %></td>
+        <td align="center"><b><%= service.id %></b></td>
         <td><%= service.name %></td>
-        <td><%= service.price %></td>
-        <td><%= service.observation %></td>
-        <td><%= service.citation_id %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_service_path(service), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+        <td align="right"><%= service.price %></td>
+        <td align="center"><%= 'Si' %></td>
+        <td align="center">
+           <%= link_to "<i class='fa fa-eye'></i>".html_safe,
+                      service_path(service) %>
+
+          <%= link_to "<i class='fa fa-pencil'></i>".html_safe,
+                      edit_service_path(service) %>
+                      
+          <%= link_to "<i class='fa fa-trash-o'></i>".html_safe,
                       service_path(service),
                       :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '¿Está seguro de eliminar?')) },
-                      :class => 'btn btn-xs btn-danger' %>
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '¿Está seguro de eliminar?')) } %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<div class="col-md-8 col-md-offset-5">
 <%= link_to t('.new', :default => t("helpers.submit.new")),
             new_service_path,
             :class => 'btn btn-primary' %>
+</div>

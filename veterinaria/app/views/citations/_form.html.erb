@@ -1,3 +1,4 @@
+
 <%= form_for @citation, :html => { :class => "form-horizontal citation" } do |f| %>
 
     <% if @citation.errors.any? %>
@@ -15,13 +16,17 @@
     </div>
   <% end %>
 
+<div class="col-md-4">
   <div class="control-group">
     <%= f.label :"Fecha", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :date, :class => 'form-control' %>
+      <%= f.text_field:date, :class => 'form-control' %>
     </div>
     <%= error_span(@citation[:date]) %>
   </div>
+</div>
+
+<div class="col-md-4">
   <div class="control-group">
     <%= f.label :"Hora", :class => 'control-label' %>
     <div class="controls">
@@ -29,18 +34,185 @@
     </div>
     <%= error_span(@citation[:time]) %>
   </div>
+</div>
+
+<div class="col-md-4">
+  <div class="control-group">
+    <%= f.label :"Cliente", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select(:client_id, @clients, {:include_blank =>"Seleccione"}, {:class => 'form-control'}) %>
+    </div>
+    <%= error_span(@citation[:patient_id]) %>
+  </div>
+</div>
+
+<div class="col-md-12">
   <div class="control-group">
     <%= f.label :"Observaciones", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :observation, :class => 'form-control' %>
+      <%= f.text_area :observation, :class => 'form-control', :type => 'number'%>
     </div>
     <%= error_span(@citation[:observation]) %>
   </div>
-   <div class="row">&nbsp;</div>
+</div>
 
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+<div class="col-md-3">
+<a class="btn btn-primary" id="VerDisponibilidad"><span class="icon"></span>Ver disponibilidad</a>
+<a class="btn btn-primary" id="OcultarDisponibilidad" style="display: none;" ><span class="icon"></span>Ocultar disponibilidad</a>
+</div>
+
+
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  
+  $("#VerDisponibilidad").click(function(){
+    $("#Disponibilidad").show();
+    $("#VerDisponibilidad").hide();
+    $("#OcultarDisponibilidad").show();
+  });
+  $("#OcultarDisponibilidad").click(function(){
+    $("#Disponibilidad").hide();
+    $("#OcultarDisponibilidad").hide();
+    $("#VerDisponibilidad").show();
+  });
+});
+</script>
+
+<div id="Disponibilidad" style="display: none;" class="col-md-12">
+<div class="panel panel-primary" id="panelDisponibilidad">
+                            <div class="panel-heading">
+                                <strong>Disponibilidad</strong>
+                            </div>
+                            <div class="panel-body"> 
+                                <div class="row">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <div aria-label="First group" role="group" class="btn-group">
+                                            <button class="btn btn-default" type="button">08:00</button>
+                                            <button class="btn btn-default" type="button">09:00</button>
+                                            <button class="btn btn-default" type="button">10:00</button>
+                                            <button class="btn btn-default" type="button">11:00</button>
+                                            <button class="btn btn-default" type="button">12:00</button>
+                                            <button class="btn btn-default" type="button">13:00</button>
+                                            <button class="btn btn-default" type="button">14:00</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <div aria-label="First group" role="group" class="btn-group">
+                                            <button class="btn btn-default" type="button">15:00</button>
+                                            <button class="btn btn-default" type="button">16:00</button>
+                                            <button class="btn btn-default" type="button">17:00</button>
+                                            <button class="btn btn-default" type="button">18:00</button>
+                                            <button class="btn btn-default" type="button">19:00</button>
+                                            <button class="btn btn-default" type="button">20:00</button>
+                                            <button class="btn btn-default" type="button">21:00</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+</div>
+</div>
+
+<div class="row">&nbsp;</div>
+
+<div class="col-md-12">
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <strong>SERVICIOS</strong>
+  </div>
+    
+    <div class="panel-body"> 
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Servicio</label>
+          <div class="controls">
+            <%= f.select(:id, Service.all.map{|p| [ p.name, p.id ] }, {:include_blank =>"Seleccione"}, {:class => 'form-control'}) %>
+          </div>
+          <span class="help-block"></span>
+        </div>
+      </div>
+    
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Cantidad</label>
+          	<input type="number" class="form-control input-sm" title="Cantidad" name="Cantidad" value="1" min="1">
+        		<span class="help-block"></span>
+        </div>
+      </div>
+    
+    <div class="col-md-2">
+      <div class="form-group">
+        <label> </label>
+          <a href="#" class="btn btn-sm btn-primary btn-block" title="Agregar"><i class="fa fa-plus"></i>&nbsp; AGREGAR</a>
+          <span class="help-block"></span>
+      </div>
+    </div>
+    
+    
+    <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped table-bordered table-hover" id="datable-grilla-bandeja-sol-usuario-ver">
+                                                        <thead>	
+                                                            <tr>
+                                                                <th class="text-center">C&oacute;d. Servicio</th>
+                                                                <th class="text-center">Nombre Servicio</th>
+                                                                <th class="text-center">Cantidad</th>
+                                                                <th class="text-center">Acci&oacute;n</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr class="odd">
+                                                                <td>&nbsp;</td>
+                                                                <td>&nbsp;</td>
+                                                                <td>&nbsp;</td>
+                                                                <td class="text-center">
+                                									<a href="#" title="Quitar"><i class="fa fa-remove iconRemoveColor"></i></a>
+                                								</td>
+                                                            </tr>
+                                                            <tr class="even">
+                                                                <td>&nbsp;</td>
+                                                                <td>&nbsp;</td>
+                                                                <td>&nbsp;</td>
+                                                                <td class="text-center">
+                                									<a href="#" title="Quitar"><i class="fa fa-remove iconRemoveColor"></i></a>
+                                								</td>
+                                                            </tr>
+                                                            <tr class="odd">
+                                                                <td>&nbsp;</td>
+                                                                <td>&nbsp;</td>
+                                                                <td>&nbsp;</td>
+                                                                <td class="text-center">
+                                									<a href="#" title="Quitar"><i class="fa fa-remove iconRemoveColor"></i></a>
+                                								</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+  
+  
+<div class="row"></div>
+<div class="row"></div>
+
+
+<div class="col-md-8 col-md-offset-5">
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.submit.cancel")),
             citations_path, :class => 'btn btn-default' %>
-
-  
+</div>            
+            
 <% end %>

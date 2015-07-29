@@ -9,23 +9,24 @@
       <th style="text-align: center">Id Paciente</th>
       <th style="text-align: center">Nombre</th>
       <th style="text-align: center">Color</th>
-      <th style="text-align: center">Fecha</br>nacimiento</th>
+      <th style="text-align: center">Fecha nac.</th>
       <th style="text-align: center">Sexo</th>
       <th style="text-align: center">Peso</th>
       <th style="text-align: center">Dueño</th>
       <th style="text-align: center">Acciones</th>
     </tr>
   </thead>
+
   <tbody>
     <% @patients.each do |patient| %>
       <tr>
         <td align="center" font-bold="true"><b><%= patient.id%></b></td>
         <td><%= patient.name %></td>
         <td><%= patient.color %></td>
-        <td><%= patient.birthday %></td>
-        <td><%= patient.sex %></td>
-        <td><%= patient.weight %></td>
-        <td></td>
+        <td align="center"><%= patient.birthday %></td>
+        <td align="center"><%= patient.sex %></td>
+        <td align="right"><%= patient.weight %></td>
+        <td><%= patient.client_name %> <%= patient.client_firstlastname %></td>
         <td align="center">
 
           <%= link_to "<i class='fa fa-eye'></i>".html_safe,

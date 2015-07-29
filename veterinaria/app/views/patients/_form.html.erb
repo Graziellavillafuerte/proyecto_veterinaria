@@ -39,7 +39,7 @@
     <div class="control-group">
       <%= f.label :birthday, :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :birthday, :class => 'form-control' %>
+        <%= f.date_field :birthday, :class => 'form-control'%>
       </div>
       <%= error_span(@patient[:birthday]) %>
     </div>
@@ -67,9 +67,9 @@
   
   <div class="col-md-4">
     <div class="control-group">
-      <%= f.label :client_id, :class => 'control-label' %>
+      <%= f.label :"Cliente", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :client_id, :class => 'form-control' %>
+        <%= f.select(:client_id, @client, {:include_blank => "Seleccione"} ,{:class => 'form-control'})%>
       </div>
       <%= error_span(@patient[:client_id]) %>
     </div>

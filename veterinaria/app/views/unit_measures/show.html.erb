@@ -1,24 +1,21 @@
 <%- model_class = UnitMeasure -%>
-<div class="row"></div>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong>Nombre corto:</strong></dt>
+  <dt><strong><%= model_class.human_attribute_name(:short_name) %>:</strong></dt>
   <dd><%= @unit_measure.short_name %></dd>
-  <dt><strong>Nombre</strong></dt>
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @unit_measure.name %></dd>
-  <dt><strong>Descripción</strong></dt>
-  <dd><%= @unit_measure.description %></dd>
 </dl>
 
-<%= link_to t('.back', :default => t("CERRAR")),
+<%= link_to t('.back', :default => t("helpers.links.back")),
               unit_measures_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("EDITAR")),
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_unit_measure_path(@unit_measure), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("ELIMINAR")),
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               unit_measure_path(@unit_measure),
               :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '¿Está seguro de eliminar?')) },
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Citation Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Quantity</th>
+      <th>Amount</th>
+      <th>Citation</th>
+      <th>Client</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @citation_details.each do |citation_detail| %>
+      <tr>
+        <td><%= citation_detail.quantity %></td>
+        <td><%= citation_detail.amount %></td>
+        <td><%= citation_detail.citation %></td>
+        <td><%= citation_detail.client %></td>
+        <td><%= link_to 'Show', citation_detail %></td>
+        <td><%= link_to 'Edit', edit_citation_detail_path(citation_detail) %></td>
+        <td><%= link_to 'Destroy', citation_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Citation detail', new_citation_detail_path %>

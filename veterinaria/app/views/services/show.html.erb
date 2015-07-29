@@ -3,24 +3,106 @@
 <div class="page-header">
   <h3><b><%=t '.title', :default => 'VER SERVICIO'%></b></h3>
 </div>
+<%= form_for @service, :html => { :class => "form-horizontal service" } do |f| %>
 
-<dl class="dl-horizontal">
-  <dt><strong>Nombre:</strong></dt>
-  <dd><%= @service.name %></dd>
-  <dt><strong>Precio:</strong></dt>
-  <dd><%= @service.price %></dd>
-  <dt><strong>Observaciones:</strong></dt>
-  <dd><%= @service.observation %></dd>
-  <dt><strong>id citación:</strong></dt>
-  <dd><%= @service.citation_id %></dd>
-</dl>
+    <% if @service.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @service.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
 
-<%= link_to t('.back', :default => t("CERRAR")),
-              services_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("EDITAR")),
-              edit_service_path(@service), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("ELIMINAR")),
+<div class="col-md-6">
+  <div class="control-group">
+    <%= f.label :"Nombre", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control', :readonly => 'readonly' %>
+    </div>
+    <%= error_span(@service[:name]) %>
+  </div>
+</div>
+
+<div class="col-md-6">
+  <div class="control-group">
+    <%= f.label :"Precio", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :price, :class => 'form-control', :readonly => 'readonly' %>
+    </div>
+    <%= error_span(@service[:price]) %>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <div class="control-group">
+    <%= f.label :"Observación", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :observation, :class => 'form-control', :readonly => 'readonly' %>
+    </div>
+    <%= error_span(@service[:observation]) %>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="control-group">
+    <%= f.label :citation_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :citation_id, :class => 'form-control', :readonly => 'readonly' %>
+    </div>
+    <%= error_span(@service[:citation_id]) %>
+  </div>
+</div>
+
+
+
+<!-- ############################### -->
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+<div class="col-md-12">
+  <h4><b><%=t '.title', :default => 'PRODUCTOS'%></b></h4>
+
+
+<table class="table table-striped table-bordered table-hover"  style="padding-left: 20">
+  <thead>
+    <tr>
+      <th style="text-align: center">Id Producto</th>
+      <th style="text-align: center">Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @service_details.each do |service_detail| %>
+      <tr>
+        <td align="center"><b><%= product.id%></b></td>
+        <td><%= service_detail.product_name %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<!-- ############################### -->
+
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+<div class="col-md-6 col-md-offset-4">
+<%= link_to t('.back', :default => t("helpers.submit.back")),
+              services_path, :class => 'btn btn-primary'  %>
+<%= link_to t('.edit', :default => t("helpers.submit.edit")),
+              edit_service_path(@service), :class => 'btn btn-primary' %>
+<%= link_to t('.destroy', :default => t("helpers.submit.destroy")),
               service_path(@service),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '¿Está seguro de eliminar?')) },
-              :class => 'btn btn-danger' %>
+              :class => 'btn btn-primary' %>
+</div>
+  
+<% end %>

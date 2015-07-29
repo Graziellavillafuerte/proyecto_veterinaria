@@ -5,7 +5,7 @@
 </div>
 
 <%= form_for @patient, :html => { :class => "form-horizontal patient" } do |f| %>
-
+    
     <% if @patient.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
@@ -73,9 +73,9 @@
   
   <div class="col-md-4">
     <div class="control-group">
-      <%= f.label :client_id, :class => 'control-label' %>
+      <%= f.label :"Cliente", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :client_id, :class => 'form-control', :readonly => 'readonly' %>
+        <%= f.text_field :client_id ,  :class => 'form-control', :readonly => 'readonly' %>
       </div>
       <%= error_span(@patient[:client_id]) %>
     </div>

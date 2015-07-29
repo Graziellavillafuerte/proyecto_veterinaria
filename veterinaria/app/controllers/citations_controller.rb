@@ -15,6 +15,13 @@ class CitationsController < ApplicationController
   # GET /citations/new
   def new
     @citation = Citation.new
+    #@patients = Patient.all.map{|p| [ p.name, p.id ] }
+    @clients = Client.all.map{|p| [ p.name, p.id ] }
+    #@citations_details = CitationDetail.all
+    @services = Service.all.map{|p| [ p.id, p.name ] }
+    @citations = Citation.all
+    @citas = @citations.each do |citation|
+    end
   end
 
   # GET /citations/1/edit

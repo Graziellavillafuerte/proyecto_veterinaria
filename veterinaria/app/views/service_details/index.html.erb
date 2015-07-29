@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Service Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Quantity</th>
+      <th>Product</th>
+      <th>Service</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @service_details.each do |service_detail| %>
+      <tr>
+        <td><%= service_detail.quantity %></td>
+        <td><%= service_detail.product %></td>
+        <td><%= service_detail.service %></td>
+        <td><%= link_to 'Show', service_detail %></td>
+        <td><%= link_to 'Edit', edit_service_detail_path(service_detail) %></td>
+        <td><%= link_to 'Destroy', service_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Service detail', new_service_detail_path %>

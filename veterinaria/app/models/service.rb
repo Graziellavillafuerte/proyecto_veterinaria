@@ -12,10 +12,16 @@
 #
 
 class Service < ActiveRecord::Base
-  has_and_belongs_to_many :citations
+  #has_and_belongs_to_many :citations
   #belongs_to :citation
+  has_many :service_details
+  has_many :products, :through => :service_details
+  has_many :citation_details
+  has_many :citations, :through => :citation_details
   
   validates_presence_of :name, :message => '^ Ingrese el nombre del servicio.'
   validates_presence_of :price, :message => '^ Ingrese el precio del servicio.'
   #validates :name, :price, presence: true
+  
+  delegate :name, :to => :product, :prefix => true
 end

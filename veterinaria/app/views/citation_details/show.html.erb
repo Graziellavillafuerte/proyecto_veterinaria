@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @citation_detail.quantity %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @citation_detail.amount %>
+</p>
+
+<p>
+  <strong>Citation:</strong>
+  <%= @citation_detail.citation %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @citation_detail.client %>
+</p>
+
+<%= link_to 'Edit', edit_citation_detail_path(@citation_detail) %> |
+<%= link_to 'Back', citation_details_path %>

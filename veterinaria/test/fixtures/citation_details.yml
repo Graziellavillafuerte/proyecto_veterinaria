@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: citation_details
+#
+#  id          :integer          not null, primary key
+#  quantity    :integer
+#  amount      :decimal(6, 2)
+#  citation_id :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  service_id  :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quantity: 1
+  amount: 9.99
+  citation_id: 
+  client_id: 
+
+two:
+  quantity: 1
+  amount: 9.99
+  citation_id: 
+  client_id: 

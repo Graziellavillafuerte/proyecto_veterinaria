@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150724055449) do
+ActiveRecord::Schema.define(version: 20150728014920) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -20,13 +20,29 @@ ActiveRecord::Schema.define(version: 20150724055449) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "citation_details", force: :cascade do |t|
+    t.integer  "quantity",    limit: 4
+    t.decimal  "amount",                precision: 6, scale: 2
+    t.integer  "citation_id", limit: 4
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.integer  "service_id",  limit: 4
+  end
+
+  add_index "citation_details", ["citation_id"], name: "index_citation_details_on_citation_id", using: :btree
+  add_index "citation_details", ["service_id"], name: "index_citation_details_on_service_id", using: :btree
+
   create_table "citations", force: :cascade do |t|
     t.date     "date"
     t.time     "time"
     t.text     "observation", limit: 65535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "state",       limit: 4
+    t.integer  "client_id",   limit: 4
   end
+
+  add_index "citations", ["client_id"], name: "index_citations_on_client_id", using: :btree
 
   create_table "clients", force: :cascade do |t|
     t.string   "name",           limit: 255
@@ -77,16 +93,18 @@ ActiveRecord::Schema.define(version: 20150724055449) do
 
   create_table "products", force: :cascade do |t|
     t.string   "name",                limit: 100
-    t.decimal  "cost_price",                        precision: 10
-    t.decimal  "sale_price",                        precision: 10
-    t.string   "long_description",    limit: 200
+    t.decimal  "cost_price",                        precision: 6, scale: 2
+    t.decimal  "sale_price",                        precision: 6, scale: 2
+    t.string   "long_description",    limit: 250
     t.text     "observation",         limit: 65535
     t.integer  "product_category_id", limit: 4
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.integer  "unit_measure_id",     limit: 4
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
   end
 
   add_index "products", ["product_category_id"], name: "index_products_on_product_category_id", using: :btree
+  add_index "products", ["unit_measure_id"], name: "index_products_on_unit_measure_id", using: :btree
 
   create_table "provinces", force: :cascade do |t|
     t.string   "name",          limit: 255
@@ -107,6 +125,17 @@ ActiveRecord::Schema.define(version: 20150724055449) do
 
   add_index "races", ["category_id"], name: "index_races_on_category_id", using: :btree
 
+  create_table "service_details", force: :cascade do |t|
+    t.integer  "quantity",   limit: 4
+    t.integer  "product_id", limit: 4
+    t.integer  "service_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "service_details", ["product_id"], name: "index_service_details_on_product_id", using: :btree
+  add_index "service_details", ["service_id"], name: "index_service_details_on_service_id", using: :btree
+
   create_table "services", force: :cascade do |t|
     t.string   "name",        limit: 60
     t.decimal  "price",                     precision: 10
@@ -119,17 +148,22 @@ ActiveRecord::Schema.define(version: 20150724055449) do
   add_index "services", ["citation_id"], name: "index_services_on_citation_id", using: :btree
 
   create_table "unit_measures", force: :cascade do |t|
-    t.string   "short_name",  limit: 5
-    t.string   "name",        limit: 30
-    t.string   "description", limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "short_name", limit: 5
+    t.string   "name",       limit: 40
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
+  add_foreign_key "citation_details", "citations"
+  add_foreign_key "citation_details", "services"
+  add_foreign_key "citations", "clients"
   add_foreign_key "districts", "provinces"
   add_foreign_key "patients", "clients"
   add_foreign_key "products", "product_categories"
+  add_foreign_key "products", "unit_measures"
   add_foreign_key "provinces", "departments"
   add_foreign_key "races", "categories"
+  add_foreign_key "service_details", "products"
+  add_foreign_key "service_details", "services"
   add_foreign_key "services", "citations"
 end

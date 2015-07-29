@@ -18,7 +18,7 @@ class UnitMeasuresControllerTest < ActionController::TestCase
 
   test "should create unit_measure" do
     assert_difference('UnitMeasure.count') do
-      post :create, unit_measure: { description: @unit_measure.description, name: @unit_measure.name, short_name: @unit_measure.short_name }
+      post :create, unit_measure: { name: @unit_measure.name, short_name: @unit_measure.short_name }
     end
 
     assert_redirected_to unit_measure_path(assigns(:unit_measure))
@@ -35,7 +35,7 @@ class UnitMeasuresControllerTest < ActionController::TestCase
   end
 
   test "should update unit_measure" do
-    patch :update, id: @unit_measure, unit_measure: { description: @unit_measure.description, name: @unit_measure.name, short_name: @unit_measure.short_name }
+    patch :update, id: @unit_measure, unit_measure: { name: @unit_measure.name, short_name: @unit_measure.short_name }
     assert_redirected_to unit_measure_path(assigns(:unit_measure))
   end
 

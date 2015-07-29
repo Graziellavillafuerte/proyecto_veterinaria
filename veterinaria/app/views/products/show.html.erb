@@ -1,30 +1,108 @@
 <%- model_class = Product -%>
-<div class="row"></div>
+<div class="row">&nbsp;</div>
 <div class="page-header">
-  <h3><b><%=t '.title', :default => 'VEEER PRODUCTO' %></b></h1>
+  <h3><B><%=t '.title', :default => 'CONSULTAR PRODUCTO' %></B></h3>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong>Nombre:</strong></dt>
-  <dd><%= @product.name %></dd>
-  <dt><strong>Precio costo:</strong></dt>
-  <dd><%= @product.cost_price %></dd>
-  <dt><strong>Precio venta:</strong></dt>
-  <dd><%= @product.sale_price %></dd>
-  <dt><strong>Descripción larga:</strong></dt>
-  <dd><%= @product.long_description %></dd>
-  <dt><strong>Observaciones:</strong></dt>
-  <dd><%= @product.observation %></dd>
-  <dt><strong>Id Categoria producto:</strong></dt>
-  <dd><%= @product.product_category_id %></dd>
-</dl>
+<%= form_for @product, :html => { :class => "form-horizontal product" } do |f| %>
 
-<%= link_to t('.back', :default => t("CERRAR")),
-              products_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("EDITAR")),
-              edit_product_path(@product), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("ELIMINAR")),
+    <% if @product.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @product.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+<div class="col-md-4">
+  <div class="control-group">
+    <%= f.label :"Nombre producto", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control', :readonly => 'readonly' %>
+    </div>
+    <%= error_span(@product[:name]) %>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="control-group">
+    <%= f.label :"Categoría", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :product_category_name, :class => 'form-control', :readonly => 'readonly' %>
+    </div>
+    <%= error_span(@product[:product_category_id]) %>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="control-group">
+    <%= f.label :"Unidad de medida", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :unit_measure_name, :class => 'form-control', :readonly => 'readonly' %>
+    </div>
+    <%= error_span(@product[:name]) %>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <div class="control-group">
+    <%= f.label :"Descripción larga", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :long_description, :class => 'form-control', :readonly => 'readonly' %>
+    </div>
+    <%= error_span(@product[:long_description]) %>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="control-group">
+    <%= f.label :"Precio costo", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :cost_price, :class => 'form-control', :readonly => 'readonly' %>
+    </div>
+    <%= error_span(@product[:cost_price]) %>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="control-group">
+    <%= f.label :"Precio venta", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :sale_price, :class => 'form-control', :readonly => 'readonly' %>
+    </div>
+    <%= error_span(@product[:sale_price]) %>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <div class="control-group">
+    <%= f.label :observation, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :observation, :class => 'form-control', :readonly => 'readonly' %>
+    </div>
+    <%= error_span(@product[:observation]) %>
+  </div>
+</div>
+
+  
+<% end %>
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+<div class="col-md-6 col-md-offset-4">
+<%= link_to t('.back', :default => t("helpers.submit.back")),
+              products_path, :class => 'btn btn-primary'  %>
+<%= link_to t('.edit', :default => t("helpers.submit.edit")),
+              edit_product_path(@product), :class => 'btn btn-primary' %>
+<%= link_to t('.destroy', :default => t("helpers.submit.destroy")),
               product_path(@product),
               :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '¿Está seguro de eliminar?')) },
-              :class => 'btn btn-danger' %>
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Está seguro de eliminar?')) },
+              :class => 'btn btn-primary' %>
+</div>

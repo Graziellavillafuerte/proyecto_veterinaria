@@ -22,4 +22,7 @@ class Patient < ActiveRecord::Base
   validates_presence_of :birthday, :message => '^ Ingrese la fecha de nacimiento.'
   validates_presence_of :weight, :message => '^ Ingrese el peso del paciente.'
   
+  delegate :name, :to => :client, :prefix => true
+  delegate :firstlastname, :to => :client, :prefix => true
+  delegate :secondlastname, :to => :client, :prefix => true
 end

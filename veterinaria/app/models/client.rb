@@ -16,6 +16,8 @@
 
 class Client < ActiveRecord::Base
     has_many :patients
+    has_many :citations
+    
     
     #validates :name, :firstlastname, :secondlastname, :birthday, presence: true
     validates_presence_of :name, :message => '^ Ingrese el nombre del cliente.'

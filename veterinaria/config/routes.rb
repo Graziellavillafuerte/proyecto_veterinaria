@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  resources :citation_details
+  resources :citation_details
+  resources :service_details
+  resources :products
+  resources :unit_measures
+  resources :products
+  resources :unit_measures
+  resources :products
+  resources :products
+  resources :products
+  resources :unit_measures
+  resources :unit_measures
+  resources :unit_measures
+  resources :unit_measures
   resources :departments
   resources :services
   resources :citations

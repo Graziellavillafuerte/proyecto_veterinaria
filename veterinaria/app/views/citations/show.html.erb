@@ -13,12 +13,12 @@
   <dd><%= @citation.observation %></dd>
 </dl>
 
-<%= link_to t('.back', :default => t("CERRAR")),
+<%= link_to t('.back', :default => t("helper.submit.back")),
               citations_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("EDITAR")),
+<%= link_to t('.edit', :default => t("helper.submit.edit")),
               edit_citation_path(@citation), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("ELIMINAR")),
+<%= link_to t('.destroy', :default => t("helper.submit.destroy")),
               citation_path(@citation),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+              :class => 'btn btn-primary' %>

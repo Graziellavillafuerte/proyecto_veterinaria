@@ -15,10 +15,14 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    @product_category = ProductCategory.all.map{|p| [ p.name, p.id ] }
+    @unit_measure = UnitMeasure.all.map{|p| [ p.name, p.id ] }
   end
 
   # GET /products/1/edit
   def edit
+    @product_category = ProductCategory.all.map{|p| [ p.name, p.id ] }
+    @unit_measure = UnitMeasure.all.map{|p| [ p.name, p.id ] }
   end
 
   # POST /products
@@ -69,6 +73,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :cost_price, :cost_price, :sale_price, :sale_price, :long_description, :observation, :product_category_id)
+      params.require(:product).permit(:name, :cost_price, :cost_price, :sale_price, :sale_price, :long_description, :observation, :product_category_id, :unit_measure_id)
     end
 end

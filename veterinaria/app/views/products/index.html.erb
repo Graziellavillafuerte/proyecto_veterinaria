@@ -6,42 +6,39 @@
 <table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
-      <th style="text-align: center">Id</th>
+      <th style="text-align: center">Id Producto</th>
       <th style="text-align: center">Nombre</th>
-      <th style="text-align: center">Precio costo</th>
-      <th style="text-align: center">Precio venta</th>
-      <th style="text-align: center">Descripción larga</th>
-      <th style="text-align: center">Observaciones</th>
-      <th style="text-align: center">Categoria product Id</th>
-      <th style="text-align: center">Fecha creación</th>
-      <th>Acciones</th>
+      <th style="text-align: center">Categor&iacute;a</th>
+      <th style="text-align: center">Unid. med.</th>
+      <th style="text-align: center">Acciones</th>
     </tr>
   </thead>
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= link_to product.id, product_path(product) %></td>
+        <td align="center"><b><%= product.id%></b></td>
         <td><%= product.name %></td>
-        <td><%= product.cost_price %></td>
-        <td><%= product.sale_price %></td>
-        <td><%= product.long_description %></td>
-        <td><%= product.observation %></td>
-        <td><%= product.product_category_id %></td>
-        <td><%=l product.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("/assets/images/error-small.png")),
-                      edit_product_path(product), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+        <td><%= product.product_category_name %></td>
+        <td><%= product.unit_measure_name %></td>
+        <td align="center">
+           <%= link_to "<i class='fa fa-eye'></i>".html_safe,
+                      product_path(product) %>
+
+          <%= link_to "<i class='fa fa-pencil'></i>".html_safe,
+                      edit_product_path(product) %>
+                      
+          <%= link_to "<i class='fa fa-trash-o'></i>".html_safe,
                       product_path(product),
                       :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '¿Está seguro de eliminar?')) },
-                      :class => 'btn btn-xs btn-danger' %>
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '¿Está seguro de eliminar?')) } %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<div class="col-md-8 col-md-offset-5">
 <%= link_to t('.new', :default => t("helpers.submit.new")),
             new_product_path,
             :class => 'btn btn-primary' %>
+</div>

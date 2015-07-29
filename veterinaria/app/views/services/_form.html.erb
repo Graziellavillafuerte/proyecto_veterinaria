@@ -15,40 +15,100 @@
     </div>
   <% end %>
 
+<div class="col-md-6">
   <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
+    <%= f.label :"Nombre", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :name, :class => 'form-control' %>
     </div>
     <%= error_span(@service[:name]) %>
   </div>
+</div>
+
+<div class="col-md-6">
   <div class="control-group">
-    <%= f.label :price, :class => 'control-label' %>
+    <%= f.label :"Precio", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :price, :class => 'form-control' %>
     </div>
     <%= error_span(@service[:price]) %>
   </div>
+</div>
+
+<div class="col-md-12">
   <div class="control-group">
-    <%= f.label :observation, :class => 'control-label' %>
+    <%= f.label :"Observación", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :observation, :class => 'form-control' %>
+      <%= f.text_area :observation, :class => 'form-control' %>
     </div>
     <%= error_span(@service[:observation]) %>
   </div>
-  <div class="control-group">
-    <%= f.label :citation_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :citation_id, :class => 'form-control' %>
-    </div>
-    <%= error_span(@service[:citation_id]) %>
-  </div>
+</div>
 
-  <div class="control-group">
-    <label>&nbsp;</label>
-  </div>
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.submit.new")),
-            services_path, :class => 'btn btn-default' %>
+<!-- ############################### -->
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
 
+<div class="col-md-12">
+  <h4><b><%=t '.title', :default => 'PRODUCTOS'%></b></h4>
+
+<div class="col-md-4">
+        <div class="control-group">
+          <%= f.label :"Producto", :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :citation_id, :class => 'form-control' %>
+        </div>
+        </div>
+</div>
+
+<div class="col-md-4">
+        <div class="control-group">
+          <%= f.label :" " , :class => 'control-label' %>
+        <div class="controls">
+          <a href="javascript:cargar( '#' );" class="btn btn-primary" title="Agregar Producto">
+          <i class="fa fa-plus"></i>&nbsp; Agregar Producto</a>
+        </div>
+        </div>
+</div>
+
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+<table class="table table-striped table-bordered table-hover"  style="padding-left: 20">
+  <thead>
+    <tr>
+      <th style="text-align: center">Id Producto</th>
+      <th style="text-align: center">Nombre</th>
+      <th style="text-align: center">Quitar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @service_details.each do |service_detail| %>
+      <tr>
+        <td align="center"><b><%= product.id%></b></td>
+        <td><%= service_detail.product_name %></td>
+        <td align="center">
+          <%= link_to "<i class='fa fa-minus-circle'></i>".html_safe,
+                      service_detail_path(service_detail),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.quitar", :default => '¿Está seguro de eliminar?')) } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<!-- ############################### -->
+
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+  
+  <div class="col-md-6 col-sm-offset-4">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.submit.cancel")),
+              services_path, :class => 'btn btn-primary' %>
+               
+  </div>
+  
 <% end %>
+

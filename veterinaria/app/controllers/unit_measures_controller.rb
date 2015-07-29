@@ -69,6 +69,6 @@ class UnitMeasuresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def unit_measure_params
-      params.require(:unit_measure).permit(:short_name, :name, :description)
+      params.require(:unit_measure).permit(:short_name, :name)
     end
 end
