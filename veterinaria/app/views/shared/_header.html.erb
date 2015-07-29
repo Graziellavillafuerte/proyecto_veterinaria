@@ -20,9 +20,9 @@
             </a>
         </li>
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Cerrar sesi&oacute;n">
-                <i class="fa fa-sign-out fa-fw"></i>
-            </a>
+            <% if user_signed_in? %>
+            <%= link_to "<i class='fa fa-sign-out fa-fw'></i>".html_safe, destroy_user_session_path, method: :delete %>
+            <% end %>
         </li>
     </ul>
 </nav>
