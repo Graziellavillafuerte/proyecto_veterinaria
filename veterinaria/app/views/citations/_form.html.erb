@@ -123,44 +123,49 @@ $(document).ready(function(){
 
 <div class="row">&nbsp;</div>
 
+
 <div class="col-md-12">
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <strong>SERVICIOS</strong>
-  </div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <strong>SERVICIOS</strong>
+    </div>
     
-    <div class="panel-body"> 
-      <div class="col-md-3">
-        <div class="form-group">
-          <label>Servicio</label>
-          <div class="controls">
-            <%= f.select(:id, Service.all.map{|p| [ p.name, p.id ] }, {:include_blank =>"Seleccione"}, {:class => 'form-control'}) %>
+    <div class="panel-body">
+      <div class="col-md-12">
+        <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>Servicio</label>
+            <div class="controls">
+              <%= f.select(:id, Service.all.map{|p| [ p.name, p.id ] }, {:include_blank =>"Seleccione"}, {:class => 'form-control'}) %>
+            </div>
+            <span class="help-block"></span>
           </div>
-          <span class="help-block"></span>
         </div>
-      </div>
     
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>Cantidad</label>
-          	<input type="number" class="form-control input-sm" title="Cantidad" name="Cantidad" value="1" min="1">
-        		<span class="help-block"></span>
+        <div class="col-md-2 col-md-offset-1">
+            <div class="form-group">
+              <label>Cantidad</label>
+              	<input type="number" class="form-control input-sm" title="Cantidad" name="Cantidad" value="1" min="1">
+            		<span class="help-block"></span>
+            </div>
         </div>
-      </div>
     
-    <div class="col-md-2">
+    <div class="col-md-2 col-md-offset-1">
       <div class="form-group">
         <label> </label>
           <a href="#" class="btn btn-sm btn-primary btn-block" title="Agregar"><i class="fa fa-plus"></i>&nbsp; AGREGAR</a>
           <span class="help-block"></span>
       </div>
     </div>
+  </div>
+    </div>
+    </div>
     
-    
+ 
+ 
     <div class="row">
                                     <div class="col-md-12">
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
                                                 <div class="table-responsive">
                                                     <table class="table table-striped table-bordered table-hover" id="datable-grilla-bandeja-sol-usuario-ver">
                                                         <thead>	
@@ -199,11 +204,11 @@ $(document).ready(function(){
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                            </div>
-                                        </div>
+                                           
                                     </div>
-                                </div>
-  
+    </div>
+  </div>   
+
   
 <div class="row"></div>
 <div class="row"></div>
