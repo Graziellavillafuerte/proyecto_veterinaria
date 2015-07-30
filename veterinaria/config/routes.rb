@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   resources :service_details
   resources :products
   resources :unit_measures
-  resources :departments
   resources :services
   resources :citations
   resources :product_categories
