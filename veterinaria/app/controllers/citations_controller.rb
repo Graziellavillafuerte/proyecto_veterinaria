@@ -76,6 +76,6 @@ class CitationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def citation_params
-      params.require(:citation).permit(:date, :time, :observation)
+      params.require(:citation).permit(:date, :time, :observation, :state, :service_id)
     end
 end

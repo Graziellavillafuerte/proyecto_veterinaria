@@ -4,7 +4,8 @@ class CreateCitations < ActiveRecord::Migration
       t.date :date
       t.time :time
       t.text :observation
-
+      t.references :client, index: true, foreign_key: true
+      
       t.timestamps null: false
     end
   end

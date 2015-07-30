@@ -23,5 +23,6 @@ class Service < ActiveRecord::Base
   validates_presence_of :price, :message => '^ Ingrese el precio del servicio.'
   #validates :name, :price, presence: true
   
-  delegate :name, :to => :product, :prefix => true
+  delegate :names, :to => :product, :prefix => true, allow_nil: true
+  delegate :product_id, :to => :service_detail, :prefix => true
 end

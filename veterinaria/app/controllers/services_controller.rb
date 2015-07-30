@@ -12,12 +12,13 @@ class ServicesController < ApplicationController
   def show
     @products = Product.all
     @service_details = ServiceDetail.all
+    @product = Product.all.map{|p| [ p.name, p.id ]}
   end
 
   # GET /services/new
   def new
     @service = Service.new
-    @product = ServiceDetail.all.map{|p| [ p.product_id] }
+    @product = Product.all.map{|p| [ p.name, p.id ]} 
     @service_details = ServiceDetail.all
   end
 
@@ -75,6 +76,6 @@ class ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.require(:service).permit(:name, :price, :price, :observation, :citation_id)
+      params.require(:service).permit(:name, :price, :price, :observation, :citation_id, :product_id)
     end
 end

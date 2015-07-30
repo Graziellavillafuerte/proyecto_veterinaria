@@ -49,43 +49,73 @@
   </div>
 </div>
 
-<div class="col-md-4">
-  <div class="control-group">
-    <%= f.label :citation_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :citation_id, :class => 'form-control', :readonly => 'readonly' %>
-    </div>
-    <%= error_span(@service[:citation_id]) %>
-  </div>
-</div>
-
-
-
 <!-- ############################### -->
 <div class="row">&nbsp;</div>
 <div class="row">&nbsp;</div>
 
+
 <div class="col-md-12">
-  <h4><b><%=t '.title', :default => 'PRODUCTOS'%></b></h4>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <strong>PRODUCTOS</strong>
+    </div>
+    
+    <div class="panel-body">
+      <div class="col-md-12">
+        <div class="row">
+        <div class="col-md-4">
+                <div class="control-group">
+                  <%= f.label :"Producto", :class => 'control-label' %>
+                <div class="controls">
+                  <%= f.select (:product_id, @products {:include_blank => "(Seleccione)"}, {:class => 'form-control'}) %>
+                </div>
+                </div>
+        </div>
 
+<div class="col-md-4">
+        <div class="control-group">
+          <label>&nbsp;</label>
+        <div class="controls">
+          <a href="javascript:cargar( '#' );" class="btn btn-primary" title="Agregar Producto">
+          <i class="fa fa-plus"></i>&nbsp; Agregar Producto</a>
+        </div>
+        </div>
+</div>
+</div>
+</div>
 
-<table class="table table-striped table-bordered table-hover"  style="padding-left: 20">
-  <thead>
-    <tr>
-      <th style="text-align: center">Id Producto</th>
-      <th style="text-align: center">Nombre</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @service_details.each do |service_detail| %>
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+<div class="row">
+<div class="col-md-12">
+  <table class="table table-striped table-bordered table-hover"  style="padding-left: 20">
+    <thead>
       <tr>
-        <td align="center"><b><%= product.id%></b></td>
-        <td><%= service_detail.product_name %></td>
-
+        <th style="text-align: center">C&oacute;digo Producto</th>
+        <th style="text-align: center">Nombre</th>
+        <th style="text-align: center">Quitar</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @service_details.each do |service_detail| %>
+        <tr>
+          <td align="center"><b><%= product.id%></b></td>
+          <td><%= service_detail.product_name %></td>
+          <td align="center">
+            <%= link_to "<i class='fa fa-minus-circle'></i>".html_safe,
+                        service_detail_path(service_detail),
+                        :method => :delete,
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.quitar", :default => '¿Está seguro de eliminar?')) } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+</div>
+</div>
+</div>
 </div>
 <!-- ############################### -->
 

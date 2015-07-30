@@ -50,53 +50,83 @@
 <div class="row">&nbsp;</div>
 
 <div class="col-md-12">
-  <h4><b><%=t '.title', :default => 'PRODUCTOS'%></b></h4>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <strong>PRODUCTOS</strong>
+    </div>
+    
+    <div class="panel-body">
+      <div class="col-md-12">
+        <div class="row">
+        <div class="col-md-4">
+                <div class="control-group">
+                  <%= f.label :"Producto", :class => 'control-label' %>
+                <div class="controls">
+                   <%= f.select(:id, @product, {:include_blank => "(Seleccione)"}, {:class => 'form-control'})%>
+                </div>
+                </div>
+        </div>
 
 <div class="col-md-4">
         <div class="control-group">
-          <%= f.label :"Producto", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :citation_id, :class => 'form-control' %>
-        </div>
-        </div>
-</div>
-
-<div class="col-md-4">
-        <div class="control-group">
-          <%= f.label :" " , :class => 'control-label' %>
+          <label>&nbsp;</label>
         <div class="controls">
           <a href="javascript:cargar( '#' );" class="btn btn-primary" title="Agregar Producto">
           <i class="fa fa-plus"></i>&nbsp; Agregar Producto</a>
         </div>
         </div>
 </div>
+</div>
+</div>
 
 <div class="row">&nbsp;</div>
 <div class="row">&nbsp;</div>
 
-<table class="table table-striped table-bordered table-hover"  style="padding-left: 20">
-  <thead>
+<div class="row">
+  
+<div class="col-md-12">
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover" id="datable-grilla-productos">
+    <thead>	
     <tr>
-      <th style="text-align: center">Id Producto</th>
-      <th style="text-align: center">Nombre</th>
-      <th style="text-align: center">Quitar</th>
+      <th class="text-center">C&oacute;d. Servicio</th>
+      <th class="text-center">Nombre Servicio</th>
+      <th class="text-center">Cantidad</th>
+      <th class="text-center">Quitar</th>
     </tr>
-  </thead>
-  <tbody>
-    <% @service_details.each do |service_detail| %>
-      <tr>
-        <td align="center"><b><%= product.id%></b></td>
-        <td><%= service_detail.product_name %></td>
-        <td align="center">
-          <%= link_to "<i class='fa fa-minus-circle'></i>".html_safe,
-                      service_detail_path(service_detail),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.quitar", :default => '¿Está seguro de eliminar?')) } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+    <tr class="odd">
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td class="text-center">
+      <a href="#" title="Quitar"><i class='fa fa-minus-circle'></i></a>
+      </td>
+    </tr>
+    <tr class="even">
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td class="text-center">
+      <a href="#" title="Quitar"><i class='fa fa-minus-circle'></i></a>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td class="text-center">
+      <a href="#" title="Quitar"><i class='fa fa-minus-circle'></i></a>
+      </td>
+    </tr>
+    </tbody>
+    </table>
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <!-- ############################### -->
 

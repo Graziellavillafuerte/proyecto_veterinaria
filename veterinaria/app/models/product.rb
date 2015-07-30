@@ -27,4 +27,5 @@ class Product < ActiveRecord::Base
   
   delegate :name, :to => :product_category, :prefix => true
   delegate :name, :to => :unit_measure, :prefix => true
+  delegate :name, to: :products, prefix: true
 end
