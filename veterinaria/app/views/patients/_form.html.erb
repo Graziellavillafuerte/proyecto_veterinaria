@@ -17,7 +17,7 @@
 
   <div class="col-md-4">
     <div class="control-group">
-      <%= f.label :name, :class => 'control-label' %>
+      <%= f.label :"Nombre", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :name, :class => 'form-control' %>
       </div>
@@ -27,7 +27,7 @@
   
   <div class="col-md-4">
     <div class="control-group">
-      <%= f.label :color, :class => 'control-label' %>
+      <%= f.label :"Color", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :color, :class => 'form-control' %>
       </div>
@@ -37,27 +37,32 @@
   
   <div class="col-md-4">
     <div class="control-group">
-      <%= f.label :birthday, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.date_field :birthday, :class => 'form-control'%>
-      </div>
-      <%= error_span(@patient[:birthday]) %>
+      <%= f.label :"Fecha nacimiento", :class => 'control-label' %>
+      <input class="form-control" placeholder="" type="date" title="Fecha nacimiento" name="patient[birthday]" id="fecha">
+      <span class="add-on"><i class="icon-th"></i></span>
+      <script type="text/javascript">
+        $(function () {
+        $('#fecha').datetimepicker();
+        });
+      </script>
     </div>
   </div>
   
   <div class="col-md-4">
-    <div class="control-group">
-      <%= f.label :sex, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :sex, :class => 'form-control' %>
-      </div>
-      <%= error_span(@patient[:sex]) %>
-    </div>
+   <div class="control-group">
+     <%= f.label :"Sexo", :class => 'control-label' %>
+    <select name="patient[sex]", class="form-control" title="Sexo" name="Sexo">
+      <option selected value="1">(Seleccione)</option>
+      <option value="Femenino">Femenino</option>
+      <option value="Masculino">Masculino</option>
+    </select>
+    <span class="help-block"></span>
   </div>
-  
+</div>
+
   <div class="col-md-4">
     <div class="control-group">
-      <%= f.label :weight, :class => 'control-label' %>
+      <%= f.label :"Peso (Kg)", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :weight, :class => 'form-control' %>
       </div>
@@ -69,7 +74,7 @@
     <div class="control-group">
       <%= f.label :"Cliente", :class => 'control-label' %>
       <div class="controls">
-        <%= f.select(:client_id, @client, {:include_blank => "Seleccione"} ,{:class => 'form-control'})%>
+        <%= f.select(:client_id, @client, {:include_blank => "(Seleccione)"} ,{:class => 'form-control'})%>
       </div>
       <%= error_span(@patient[:client_id]) %>
     </div>

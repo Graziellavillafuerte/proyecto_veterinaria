@@ -9,5 +9,7 @@
 #
 
 class Department < ActiveRecord::Base
+    has_many :provinces
+    
     validates_presence_of :name, :message => '^ Ingrese nombre de departamento.'
 end

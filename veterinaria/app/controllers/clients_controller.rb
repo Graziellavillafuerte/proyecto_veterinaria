@@ -15,10 +15,12 @@ class ClientsController < ApplicationController
   # GET /clients/new
   def new
     @client = Client.new
+    @district = District.all.map{|p| [ p.name, p.id ] }
   end
 
   # GET /clients/1/edit
   def edit
+    @district = District.all.map{|p| [ p.name, p.id ] }
   end
 
   # POST /clients
@@ -69,6 +71,7 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:name, :firstlastname, :secondlastname, :birthday, :direction, :phone, :email)
+      params.require(:client).permit(:name, :firstlastname, :secondlastname, :birthday, :direction, :phone,
+      :email, :district_id)
     end
 end

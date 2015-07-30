@@ -34,6 +34,7 @@
       <%= error_span(@client[:firstlastname]) %>
     </div>
   </div>
+  
   <div class="col-md-4">
     <div class="control-group">
       <%= f.label :"Apellido materno", :class => 'control-label' %>
@@ -43,25 +44,22 @@
       <%= error_span(@client[:secondlastname]) %>
     </div>
   </div>
+
+
   <div class="col-md-4">
-    <div class="control-group">
-     <%= f.label :"Fecha de nacimiento", :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :birthday, :class => 'form-control input-sm'%>
-      </div>
-      <%= error_span(@client[:birthday]) %>
-    </div>
+  <div class="control-group">
+    <label>Fecha Inicio</label>
+      <input class="form-control" placeholder="" type="date" title="Fecha Inicio" name="client[birthday]" id="fecha">
+      <span class="add-on"><i class="icon-th"></i></span>
+      <script type="text/javascript">
+        $(function () {
+        $('#fecha').datetimepicker();
+        });
+      </script>
   </div>
-  <div class="col-md-8">
-    <div class="control-group">
-      <%= f.label :"Dirección", :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :direction, :class => 'form-control' %>
-      </div>
-      <%= error_span(@client[:direction]) %>
-    </div>
-  </div>
-  <div class="col-md-6">
+</div>
+  
+    <div class="col-md-4">
     <div class="control-group">
       <%= f.label :"Teléfono", :class => 'control-label' %>
       <div class="controls">
@@ -70,7 +68,8 @@
       <%= error_span(@client[:phone]) %>
     </div>
   </div>
-  <div class="col-md-6">
+  
+  <div class="col-md-4">
     <div class="control-group">
       <%= f.label :"Correo-e", :class => 'control-label' %>
       <div class="input-group input-group-sm">
@@ -80,6 +79,27 @@
       <%= error_span(@client[:email]) %>
     </div>
   </div>
+  
+  <div class="col-md-6">
+    <div class="control-group">
+      <%= f.label :"Distrito", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select(:district_id, @district, {:include_blank =>"(Seleccione)"}, {:class => 'form-control'}) %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6">
+    <div class="control-group">
+      <%= f.label :"Dirección", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :direction, :class => 'form-control' %>
+      </div>
+      <%= error_span(@client[:direction]) %>
+    </div>
+  </div>
+  
+  <div class="row">&nbsp;</div>
   <div class="control-group">
     <label>&nbsp;</label>
   </div>

@@ -29,7 +29,7 @@
   <div class="control-group">
     <%= f.label :"Categoría", :class => 'control-label' %>
     <div class="controls">
-      <%= f.select(:product_category_id, @product_category,{:include_blank => "Selecione"}, {:class => 'form-control'}) %>
+      <%= f.select(:product_category_id, @product_category,{:include_blank => "(Seleccione)"}, {:class => 'form-control'}) %>
     </div>
     <%= error_span(@product[:product_category_id]) %>
   </div>
@@ -39,9 +39,9 @@
   <div class="control-group">
     <%= f.label :"Unidad de medida", :class => 'control-label' %>
     <div class="controls">
-      <%= f.select(:unit_measure_id, @unit_measure, {:include_blank => "Seleccione"}, {:class => 'form-control'}) %>
+      <%= f.select(:unit_measure_id, @unit_measure, {:include_blank => "(Seleccione)"}, {:class => 'form-control'}) %>
     </div>
-    <%= error_span(@product[:name]) %>
+    <%= error_span(@product[:unit_measure_id]) %>
   </div>
 </div>
 

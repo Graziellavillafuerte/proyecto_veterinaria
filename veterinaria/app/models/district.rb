@@ -11,6 +11,8 @@
 
 class District < ActiveRecord::Base
   belongs_to :province
+  has_many :clients
   
   validates_presence_of :name, :message => '^ Ingrese el nombre de distrito.'
+  
 end

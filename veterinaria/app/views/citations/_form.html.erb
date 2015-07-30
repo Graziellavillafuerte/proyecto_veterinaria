@@ -16,25 +16,30 @@
     </div>
   <% end %>
 
-<div class="col-md-4">
-  <div class="control-group">
-    <%= f.label :"Fecha", :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field:date, :class => 'form-control' %>
+  <div class="col-md-4">
+    <div class="control-group">
+      <%= f.label :"Fecha", :class => 'control-label' %>
+      <input class="form-control" placeholder="" type="date" title="Fecha" name="citation[date]" id="fecha">
+      <span class="add-on"><i class="icon-th"></i></span>
+      <script type="text/javascript">
+        $(function () {
+        $('#fecha').datetimepicker();
+        });
+      </script>
     </div>
-    <%= error_span(@citation[:date]) %>
   </div>
-</div>
 
 <div class="col-md-4">
   <div class="control-group">
     <%= f.label :"Hora", :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :time, :class => 'form-control' %>
-    </div>
+      <div class="input-group input-group-sm">
+         <%= f.text_field :time, :class => 'form-control' %>
+        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+      </div>
     <%= error_span(@citation[:time]) %>
   </div>
 </div>
+
 
 <div class="col-md-4">
   <div class="control-group">
@@ -153,7 +158,7 @@ $(document).ready(function(){
     
     <div class="col-md-2 col-md-offset-1">
       <div class="form-group">
-        <label> </label>
+        <label>&nbsp;</label>
           <a href="#" class="btn btn-sm btn-primary btn-block" title="Agregar"><i class="fa fa-plus"></i>&nbsp; AGREGAR</a>
           <span class="help-block"></span>
       </div>
@@ -217,7 +222,7 @@ $(document).ready(function(){
 <div class="col-md-8 col-md-offset-5">
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.submit.cancel")),
-            citations_path, :class => 'btn btn-default' %>
+            citations_path, :class => 'btn btn-primary' %>
 </div>            
             
 <% end %>

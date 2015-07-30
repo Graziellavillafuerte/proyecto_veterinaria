@@ -8,7 +8,6 @@
     <tr>
       <th style="text-align: center">Id Cliente</th>
       <th style="text-align: center">Nombres</th>
-      <th style="text-align: center">Apellidos</th>
       <th style="text-align: center">Direcci&oacute;n</th>
       <th style="text-align: center">Tel&eacute;fono</th>
       <th style="text-align: center">Correo-e</th>
@@ -19,10 +18,9 @@
     <% @clients.each do |client| %>
       <tr>
         <td align="center" font-bold="true"><b><%= client.id %></b></td>
-        <td><%= client.name %></td>
-        <td><%= client.firstlastname %>  <%= client.secondlastname %></td>
+        <td><%= client.name %> <%= client.firstlastname %>  <%= client.secondlastname %></td>
         <td><%= client.direction %></td>
-        <td><%= client.phone %></td>
+        <td align="center"><%= client.phone %></td>
         <td><%= client.email %></td>
         <td align="center">
 

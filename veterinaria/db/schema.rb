@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729043542) do
+ActiveRecord::Schema.define(version: 20150730072353) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -54,7 +54,10 @@ ActiveRecord::Schema.define(version: 20150729043542) do
     t.string   "email",          limit: 255
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "district_id",    limit: 4
   end
+
+  add_index "clients", ["district_id"], name: "index_clients_on_district_id", using: :btree
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -175,6 +178,7 @@ ActiveRecord::Schema.define(version: 20150729043542) do
   add_foreign_key "citation_details", "citations"
   add_foreign_key "citation_details", "services"
   add_foreign_key "citations", "clients"
+  add_foreign_key "clients", "districts"
   add_foreign_key "districts", "provinces"
   add_foreign_key "patients", "clients"
   add_foreign_key "products", "product_categories"

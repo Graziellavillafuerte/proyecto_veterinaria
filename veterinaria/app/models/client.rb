@@ -12,11 +12,13 @@
 #  email          :string(255)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  district_id    :integer
 #
 
 class Client < ActiveRecord::Base
     has_many :patients
     has_many :citations
+    belongs_to :district
     
     
     #validates :name, :firstlastname, :secondlastname, :birthday, presence: true
@@ -26,4 +28,7 @@ class Client < ActiveRecord::Base
     validates_presence_of :birthday, :message => '^ Seleccione fecha de nacimiento.'
     validates :email, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: "correo electrónico incorrecto" }
     
+    
+    delegate :name, :to => :district, :prefix => true
+
 end
