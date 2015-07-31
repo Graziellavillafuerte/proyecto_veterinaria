@@ -62,17 +62,45 @@
                 <div class="control-group">
                   <%= f.label :"Producto", :class => 'control-label' %>
                 <div class="controls">
-                   <%= f.select(:id, @product, {:include_blank => "(Seleccione)"}, {:class => 'form-control'})%>
+                  <select name="Producto", class="form-control input-sm" title="Producto" id="Producto">
+                    <option value="0">(Seleccione)</option>
+                     <%= options_for_select(@product) %>
+                  </select>
                 </div>
                 </div>
         </div>
+
+<script type="text/javascript">
+  
+  $(document).ready(function() {
+    var tabla = $('#datatable-grilla-productos').DataTable();
+    var cont = 1;
+    var quitar = "<a href='#' title='Quitar'><i class='fa fa-minus-circle'></i></a>";
+
+   $("#AgregarProducto").on( 'click', function() {
+     
+    var idproducto = $('#Producto').val();
+    var textproducto = $('#Producto').text();
+    
+          tabla.row.add(
+            [
+            idproducto,
+            textproducto,
+            quitar
+            ]).draw();
+    }),
+    
+  //$('#AgregarProducto').click();
+} );
+
+</script>
 
 <div class="col-md-4">
         <div class="control-group">
           <label>&nbsp;</label>
         <div class="controls">
-          <a href="javascript:cargar( '#' );" class="btn btn-primary" title="Agregar Producto">
-          <i class="fa fa-plus"></i>&nbsp; Agregar Producto</a>
+          <a href="#" class="btn btn-primary" title="Agregar Producto" id="AgregarProducto" 
+          ><i class="fa fa-plus"></i>&nbsp;Agregar Producto</a>
         </div>
         </div>
 </div>
@@ -86,40 +114,16 @@
   
 <div class="col-md-12">
   <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover" id="datable-grilla-productos">
+    <table class="table table-striped table-bordered table-hover" id="datatable-grilla-productos">
     <thead>	
     <tr>
       <th class="text-center">C&oacute;d. Servicio</th>
       <th class="text-center">Nombre Servicio</th>
-      <th class="text-center">Cantidad</th>
       <th class="text-center">Quitar</th>
     </tr>
     </thead>
     <tbody>
-    <tr class="odd">
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td class="text-center">
-      <a href="#" title="Quitar"><i class='fa fa-minus-circle'></i></a>
-      </td>
-    </tr>
-    <tr class="even">
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td class="text-center">
-      <a href="#" title="Quitar"><i class='fa fa-minus-circle'></i></a>
-      </td>
-    </tr>
-    <tr class="odd">
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td class="text-center">
-      <a href="#" title="Quitar"><i class='fa fa-minus-circle'></i></a>
-      </td>
-    </tr>
+    
     </tbody>
     </table>
   </div>
