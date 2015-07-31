@@ -15,9 +15,9 @@
             </a>
         </li>
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Cambiar contrase&ntilde;a">
-                <i class="fa fa-key fa-fw"></i>
-            </a>
+            <% if user_signed_in? %>
+            <%= link_to "<i class='fa fa-key fa-fw' title='Cambiar contraseña'></i>".html_safe, edit_user_registration_path, method: :get %>
+            <% end %>
         </li>
         <li class="dropdown">
             <% if user_signed_in? %>
