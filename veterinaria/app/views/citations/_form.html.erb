@@ -21,11 +21,6 @@
       <%= f.label :"Fecha", :class => 'control-label' %>
       <input class="form-control" placeholder="" type="date" title="Fecha" name="citation[date]" id="fecha">
       <span class="add-on"><i class="icon-th"></i></span>
-      <script type="text/javascript">
-        $(function () {
-        $('#fecha').datetimepicker();
-        });
-      </script>
     </div>
   </div>
 
@@ -73,24 +68,7 @@
 <div class="row">&nbsp;</div>
 <div class="row">&nbsp;</div>
 
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-  
-  $("#VerDisponibilidad").click(function(){
-    $("#Disponibilidad").show();
-    $("#VerDisponibilidad").hide();
-    $("#OcultarDisponibilidad").show();
-  });
-  $("#OcultarDisponibilidad").click(function(){
-    $("#Disponibilidad").hide();
-    $("#OcultarDisponibilidad").hide();
-    $("#VerDisponibilidad").show();
-  });
-});
-</script>
-
-<div id="Disponibilidad" style="display: none;" class="col-md-12">
+<div id="Disponibilidad" class="col-md-12">
 <div class="panel panel-primary" id="panelDisponibilidad">
                             <div class="panel-heading">
                                 <strong>Disponibilidad</strong>
@@ -228,3 +206,20 @@ $(document).ready(function(){
 </div>            
             
 <% end %>
+
+<script type="text/javascript">
+$(document).on('ready', function(){
+  $('#Disponibilidad').hide();
+  
+  $("#VerDisponibilidad").click(function(){
+    $('#Disponibilidad').removeAttr('style');
+    $("#VerDisponibilidad").hide();
+    $("#OcultarDisponibilidad").show();
+  });
+  $("#OcultarDisponibilidad").click(function(){
+    $('#Disponibilidad').attr('style', 'display: none');
+    $("#VerDisponibilidad").show();
+    $("#OcultarDisponibilidad").hide();
+  });
+});
+</script>
