@@ -18,6 +18,7 @@ class ServicesController < ApplicationController
     @service = Service.new
     @product = Product.all.map{|p| [ p.name, p.id ]} 
     @service_details = ServiceDetail.all
+    @contar_products = 0
   end
 
   # GET /services/1/edit
