@@ -145,6 +145,7 @@
 </style>
 
 <script type="text/javascript">
+
   function obtenerTabla() {
     var tabla = $('#datatable-grilla-productos').DataTable(
     {
@@ -171,6 +172,7 @@
   $(document).ready(function() {
     var tabla = obtenerTabla();
     
+
     if (<%= @contar_products %> > 0)
     {
     <% @service_details.each do |service_detail| %>
@@ -184,6 +186,7 @@
           existe = false;
     <% end %>
     }
+
     
     $("#AgregarProducto").on( 'click', function() {
       var idproducto = $('#Producto option:selected').val();
@@ -198,10 +201,13 @@
           idprod + idproducto,
           textproducto,
           "<a href='#' id='Quitar' onclick='javascript:hacer_click(" + idproducto + ")'><i class='fa fa-minus-circle'></i></a>"
+
           ]).draw();
           existe = false;
       }
     });
+
+
     $('#datatable-grilla-productos tbody').on( 'click', 'tr', function () {
       if ( $(this).hasClass('selected') ) {
            $(this).removeClass('selected');
