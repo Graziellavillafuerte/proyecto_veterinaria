@@ -17,7 +17,9 @@ class ServicesController < ApplicationController
   def new
     @service = Service.new
     @product = Product.all.map{|p| [ p.name, p.id ]} 
-    @service_details = ServiceDetail.all
+    @service_details = ServiceDetail.where(:service_id => params[:id])
+    @contar_products = @service_details.count
+    #@contar_products = 0
   end
 
   # GET /services/1/edit
@@ -26,7 +28,6 @@ class ServicesController < ApplicationController
     @service_details = ServiceDetail.where(:service_id => params[:id])
     @servicio = Service.where(:service_id => params[:id])
     @contar_products = @service_details.count
-    @nombre = Product.where(:product_id => params[:id]).select(:name)
   end
 
   # POST /services
@@ -79,6 +80,7 @@ class ServicesController < ApplicationController
   # DELETE /services/1
   # DELETE /services/1.json
   def destroy
+    ServiceDetail.delete_all(:service_id => params[:id])
     @service.destroy
     respond_to do |format|
       format.html { redirect_to services_url, notice: 'Service was successfully destroyed.' }
