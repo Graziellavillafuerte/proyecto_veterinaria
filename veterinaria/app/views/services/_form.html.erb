@@ -145,9 +145,8 @@
 </style>
 
 <script type="text/javascript">
-  
-  $(document).ready(function() {
-    var quitar = "<a id='Quitar' onclick='hacer_click()'><i class='fa fa-minus-circle'></i></a>";
+
+  function obtenerTabla() {
     var tabla = $('#datatable-grilla-productos').DataTable(
     {
         "bPaginate": false,  
@@ -160,84 +159,64 @@
         ]  
     });
     
+    return tabla;
+  }
+  
+  function hacer_click(removeId)
+  {
+      var indice = $('#' + removeId).parent().parent().index();
+      console.log(indice);
+      $('#datatable-grilla-productos').DataTable().row(indice).remove().draw( false );
+  }
+  
+  $(document).ready(function() {
+    var tabla = obtenerTabla();
+    
     <% @service_details.each do |service_detail| %>
       var valprod = "<input type='hidden' name='inputprod[]' value=\'" + <%= service_detail.product_id %> + "\' />";
         tabla.row.add(
           [
-           valprod + <%= service_detail.product_id %>,
-           <%= service_detail.product_id %>,
-            quitar
+            valprod + <%= service_detail.product_id %>,
+            <%= service_detail.product_id %>,
+            "<a id='Quitar' onclick='hacer_click(\"" + <%= service_detail.product_id %> + "\")'><i class='fa fa-minus-circle'></i></a>"
           ]).draw();
           existe = false;
     <% end %>
-
-    
-
-
- 
-
-
-      
     
     $("#AgregarProducto").on( 'click', function() {
-      //alert(<%= @contar_products %>);
       var idproducto = $('#Producto option:selected').val();
       var textproducto = $('#Producto option:selected').text();
-      var idprod = "<input type='hidden' name='inputprod[]' value=\'" + idproducto + "\' />";
-      // var existe = false;
-      
-      // for (var fila = 0; fila < tabla.rows.length; fila++) {
-      //   if (fila > 0) {
-      //       var valor = getCellValue[fila, 0];
-      //       if (idproducto == idpedido) {
-      //           existe = true;
-      //           return;
-      //       }
-      //   }
-      // }
+      var idprod = "<input type='hidden' id='" + idproducto + "' name='inputprod[]' value=\'" + idproducto + "\' />";
     
-      if (idproducto == 0)
-      {
+      if (idproducto == 0) {
         alert("Seleccione un producto");
-      }
-      else
-      {
+      } else {
         tabla.row.add(
           [
           idprod + idproducto,
           textproducto,
-          quitar
+          "<a id='Quitar' onclick='javascript:hacer_click(" + idproducto + ")'><i class='fa fa-minus-circle'></i></a>"
           ]).draw();
           existe = false;
       }
-    });  
-    
+    });
+
     $('#datatable-grilla-productos tbody').on( 'click', 'tr', function () {
       if ( $(this).hasClass('selected') ) {
            $(this).removeClass('selected');
-      }
-      else {
+      } else {
           tabla.$('tr.selected').removeClass('selected');
           $(this).addClass('selected');
       }
     });
     
     $('#QuitarProducto').on( 'click', function () {
-      if ($('#datatable-grilla-productos tbody tr').hasClass('selected'))
-      {
+      if ($('#datatable-grilla-productos tbody tr').hasClass('selected')) {
         tabla.row('.selected').remove().draw( false );
-      }
-      else
-      {
+      } else {
         alert('Elija un producto para quitar');
       }
     });
-    
-    function hacer_click()
-	  {
-	     $('#QuitarProducto').click();
-	  }
-  //$('#AgregarProducto').click();
 });
 
 </script>
