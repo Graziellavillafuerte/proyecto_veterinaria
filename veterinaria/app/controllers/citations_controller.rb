@@ -18,19 +18,22 @@ class CitationsController < ApplicationController
     #@patients = Patient.all.map{|p| [ p.name, p.id ] }
     @clients = Client.all.map{|p| [ p.name, p.id ] }
     #@citations_details = CitationDetail.all
-    @services = Service.all.map{|p| [ p.id, p.name ] }
+    @services = Service.all.map{|p| [ p.name, p.id ] }
     @citations = Citation.all
     @citas = @citations.each do |citation|
+    auto_complete_for :product, :name
     end
   end
 
   # GET /citations/1/edit
   def edit
+    auto_complete_for :producto, :entidad
   end
 
   # POST /citations
   # POST /citations.json
   def create
+    
     @citation = Citation.new(citation_params)
 
     respond_to do |format|

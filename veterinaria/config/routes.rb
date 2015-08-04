@@ -70,4 +70,9 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  
+  # map.auto_complete &#39;:controller/:action&#39;,
+  #                 :requirements => { :action => /auto_complete_for_S+/
+  # },
+  #                 :conditions => { :method => :get }
 end

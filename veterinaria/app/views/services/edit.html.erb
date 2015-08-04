@@ -1,5 +1,5 @@
 <%- model_class = Service -%>
 <div class="page-header">
-  <h3><b>EDITAR SERVICIO</b></h3>
+  <h3><b><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => 'SERVICIO' %></b></h3>
 </div>
 <%= render :partial => 'form' %>

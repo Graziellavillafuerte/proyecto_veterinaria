@@ -1,4 +1,5 @@
 <%= form_for @service, :html => { :class => "form-horizontal service" } do |f| %>
+   
 
     <% if @service.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -70,42 +71,28 @@
                 </div>
         </div>
 
-<script type="text/javascript">
+        <div class="col-md-4">
+                <div class="control-group">
+                  <label>&nbsp;</label>
+                <div class="controls">
+                  <a href="#" class="btn btn-primary" title="Agregar Producto" id="AgregarProducto" 
+                  ><i class="fa fa-plus"></i>&nbsp;Agregar Producto</a>
+                </div>
+                </div>
+        </div>
   
-  $(document).ready(function() {
-    var tabla = $('#datatable-grilla-productos').DataTable();
-    var cont = 1;
-    var quitar = "<a href='#' title='Quitar'><i class='fa fa-minus-circle'></i></a>";
-
-   $("#AgregarProducto").on( 'click', function() {
-     
-    var idproducto = $('#Producto').val();
-    var textproducto = $('#Producto').text();
-    
-          tabla.row.add(
-            [
-            idproducto,
-            textproducto,
-            quitar
-            ]).draw();
-    }),
-    
-  //$('#AgregarProducto').click();
-} );
-
-</script>
-
-<div class="col-md-4">
-        <div class="control-group">
-          <label>&nbsp;</label>
-        <div class="controls">
-          <a href="#" class="btn btn-primary" title="Agregar Producto" id="AgregarProducto" 
-          ><i class="fa fa-plus"></i>&nbsp;Agregar Producto</a>
+        <div class="col-md-4">
+                <div class="control-group">
+                  <label>&nbsp;</label>
+                <div class="controls">
+                 <a href="#" class="btn btn-primary" title="Quitar Producto" id="QuitarProducto">
+                 <i class="fa fa-minus-circle"></i>&nbsp;Quitar Producto</a> 
+                </div>
+                </div>
         </div>
-        </div>
-</div>
-</div>
-</div>
+
+      </div>
+    </div>
 
 <div class="row">&nbsp;</div>
 <div class="row">&nbsp;</div>
@@ -114,11 +101,11 @@
   
 <div class="col-md-12">
   <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover" id="datatable-grilla-productos">
+    <table class="table table-bordered" id="datatable-grilla-productos">
     <thead>	
     <tr>
-      <th class="text-center">C&oacute;d. Servicio</th>
-      <th class="text-center">Nombre Servicio</th>
+      <th class="text-center">Id Producto</th>
+      <th class="text-center">Nombre Producto</th>
       <th class="text-center">Quitar</th>
     </tr>
     </thead>
@@ -141,8 +128,120 @@
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.submit.cancel")),
               services_path, :class => 'btn btn-primary' %>
-               
   </div>
   
 <% end %>
 
+
+
+
+
+
+
+
+
+<style>
+    #datatable-grilla-productos .classDataTable { text-align: center; font-weight: bold; }
+</style>
+
+<script type="text/javascript">
+  
+  $(document).ready(function() {
+    var quitar = "<a href='#' id='Quitar' onclick='hacer_click()'><i class='fa fa-minus-circle'></i></a>";
+    var tabla = $('#datatable-grilla-productos').DataTable(
+    {
+        "bPaginate": false,  
+        "bInfo": false,  
+        "bFilter": false,
+        "aoColumns" : [
+        { sClass: "classDataTable" },
+        { sWidth: '70%' },
+        { sClass: "classDataTable" }
+        ]  
+    });
+    
+    if (<%= @contar_products %> > 0)
+    {
+      <% @service_details.each do |service_detail| %>
+        var valprod = "<input type='hidden' name='inputprod[]' value=\'" + <%= service_detail.product_id %> + "\' />";
+          tabla.row.add(
+            [
+             valprod + <%= service_detail.product_id %>,
+             <%= service_detail.product_id %>,
+              quitar
+            ]).draw();
+            existe = false;
+      <% end %>
+    
+    }
+
+    
+
+
+ 
+
+
+      
+    
+    $("#AgregarProducto").on( 'click', function() {
+      //alert(<%= @contar_products %>);
+      var idproducto = $('#Producto option:selected').val();
+      var textproducto = $('#Producto option:selected').text();
+      var idprod = "<input type='hidden' name='inputprod[]' value=\'" + idproducto + "\' />";
+      // var existe = false;
+      
+      // for (var fila = 0; fila < tabla.rows.length; fila++) {
+      //   if (fila > 0) {
+      //       var valor = getCellValue[fila, 0];
+      //       if (idproducto == idpedido) {
+      //           existe = true;
+      //           return;
+      //       }
+      //   }
+      // }
+    
+      if (idproducto == 0)
+      {
+        alert("Seleccione un producto");
+      }
+      else
+      {
+        tabla.row.add(
+          [
+          idprod + idproducto,
+          textproducto,
+          quitar
+          ]).draw();
+          existe = false;
+      }
+    });  
+    
+    $('#datatable-grilla-productos tbody').on( 'click', 'tr', function () {
+      if ( $(this).hasClass('selected') ) {
+           $(this).removeClass('selected');
+      }
+      else {
+          tabla.$('tr.selected').removeClass('selected');
+          $(this).addClass('selected');
+      }
+    });
+    
+    $('#QuitarProducto').on( 'click', function () {
+      if ($('#datatable-grilla-productos tbody tr').hasClass('selected'))
+      {
+        tabla.row('.selected').remove().draw( false );
+      }
+      else
+      {
+        alert('Elija un producto para quitar');
+      }
+    });
+    
+    function hacer_click()
+	  {
+	     $('#QuitarProducto').click();
+	  }
+  //$('#AgregarProducto').click();
+});
+
+</script>

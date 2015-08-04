@@ -19,7 +19,8 @@ gem 'twitter-bootstrap-rails'
 gem 'annotate'
 # See https://github.com/rweng/jquery-datatables-rails
 gem 'jquery-datatables-rails', '~> 3.3.0'
-
+gem 'jquery-ui-rails'
+gem 'auto_complete'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -31,6 +32,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # See, https://github.com/plataformatec/devise
 gem 'devise'
+gem 'delayed_job_active_record'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

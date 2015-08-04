@@ -13,4 +13,7 @@
 class ServiceDetail < ActiveRecord::Base
   belongs_to :product
   belongs_to :service
+  
+  delegate :name, :to => :product, :prefix => true
+  delegate :name, :to => :service, :prefix => true
 end
