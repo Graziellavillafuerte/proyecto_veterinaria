@@ -75,7 +75,7 @@
                 <div class="control-group">
                   <label>&nbsp;</label>
                 <div class="controls">
-                  <a href="#" class="btn btn-primary" title="Agregar Producto" id="AgregarProducto" 
+                  <a class="btn btn-primary" title="Agregar Producto" id="AgregarProducto" 
                   ><i class="fa fa-plus"></i>&nbsp;Agregar Producto</a>
                 </div>
                 </div>
@@ -85,7 +85,7 @@
                 <div class="control-group">
                   <label>&nbsp;</label>
                 <div class="controls">
-                 <a href="#" class="btn btn-primary" title="Quitar Producto" id="QuitarProducto">
+                 <a class="btn btn-primary" title="Quitar Producto" id="QuitarProducto">
                  <i class="fa fa-minus-circle"></i>&nbsp;Quitar Producto</a> 
                 </div>
                 </div>
@@ -147,7 +147,7 @@
 <script type="text/javascript">
   
   $(document).ready(function() {
-    var quitar = "<a href='#' id='Quitar' onclick='hacer_click()'><i class='fa fa-minus-circle'></i></a>";
+    var quitar = "<a id='Quitar' onclick='hacer_click()'><i class='fa fa-minus-circle'></i></a>";
     var tabla = $('#datatable-grilla-productos').DataTable(
     {
         "bPaginate": false,  
@@ -160,20 +160,16 @@
         ]  
     });
     
-    if (<%= @contar_products %> > 0)
-    {
-      <% @service_details.each do |service_detail| %>
-        var valprod = "<input type='hidden' name='inputprod[]' value=\'" + <%= service_detail.product_id %> + "\' />";
-          tabla.row.add(
-            [
-             valprod + <%= service_detail.product_id %>,
-             <%= service_detail.product_id %>,
-              quitar
-            ]).draw();
-            existe = false;
-      <% end %>
-    
-    }
+    <% @service_details.each do |service_detail| %>
+      var valprod = "<input type='hidden' name='inputprod[]' value=\'" + <%= service_detail.product_id %> + "\' />";
+        tabla.row.add(
+          [
+           valprod + <%= service_detail.product_id %>,
+           <%= service_detail.product_id %>,
+            quitar
+          ]).draw();
+          existe = false;
+    <% end %>
 
     
 
