@@ -18,10 +18,7 @@ class CitationsController < ApplicationController
     @citation = Citation.new
     @clients = Client.all.map{|p| [ p.name, p.id ] }
     @services_combo = Service.all.map{|p| [ p.name, p.id ] }
-    #@citations = Citation.all
-    @service_details_id = ServiceDetail.where(:service_id => params[:id])
-    @contar_services_id = @service_details_id.count
-    #@contar_services = 0
+    @contar_services = 0
   end
 
   # GET /citations/1/edit

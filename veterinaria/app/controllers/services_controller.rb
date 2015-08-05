@@ -27,7 +27,6 @@ class ServicesController < ApplicationController
     @service_details = ServiceDetail.where(:service_id => params[:id])
     @servicio = Service.where(:service_id => params[:id])
     @contar_products = @service_details.count
-    @nombre = Product.where(:product_id => params[:id]).select(:name)
     @lista_productos = Product.joins(:services)
   end
 

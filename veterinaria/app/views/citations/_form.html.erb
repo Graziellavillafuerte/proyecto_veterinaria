@@ -143,7 +143,7 @@
         <div class="control-group">
           <label>&nbsp;</label>
         <div class="controls">
-          <a href="#" class="btn btn-primary" id="AgregarServicio" 
+          <a href="javascript:void(0)" class="btn btn-primary" id="AgregarServicio" 
           ><i class="fa fa-plus"></i>&nbsp;Agregar Servicio</a>
         </div>
         </div>
@@ -220,22 +220,22 @@
     var tabla = obtenerTabla();
     
     <% @service_details.each do |service_detail| %>
-      var valprod = "<input type='hidden' name='inputprod[]' value=\'" + <%= service_detail.product_id %> + "\' />";
+      var valprod = "<input type='hidden' name='inputprod[]' value=\'" + <%= service_detail.service_id %> + "\' />";
         tabla.row.add(
           [
-            valprod + <%= service_detail.product_id %>,
-            <%= service_detail.product_id %>,
-            "<a id='Quitar' onclick='hacer_click(\"" + <%= service_detail.product_id %> + "\")'><i class='fa fa-minus-circle'></i></a>"
+            valprod + <%= service_detail.service_id %>,
+            <%= service_detail.service_id %>,
+            "<a id='Quitar' onclick='hacer_click(\"" + <%= service_detail.service_id %> + "\")'><i class='fa fa-minus-circle'></i></a>"
           ]).draw();
           existe = false;
     <% end %>
     
     $("#AgregarProducto").on( 'click', function() {
-      var idproducto = $('#Producto option:selected').val();
-      var textproducto = $('#Producto option:selected').text();
-      var idprod = "<input type='hidden' id='" + idproducto + "' name='inputprod[]' value=\'" + idproducto + "\' />";
+      var idservicio = $('#Producto option:selected').val();
+      var textservicio = $('#Producto option:selected').text();
+      var idserv = "<input type='hidden' id='" + idservicio + "' name='inputprod[]' value=\'" + idservicio + "\' />";
     
-      if (idproducto == 0) {
+      if (idservicio == 0) {
         alert("Seleccione un producto");
       } else {
         tabla.row.add(
