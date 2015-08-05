@@ -17,9 +17,8 @@ class ServicesController < ApplicationController
   def new
     @service = Service.new
     @product = Product.all.map{|p| [ p.name, p.id ]} 
-    @service_details = ServiceDetail.where(:service_id => params[:id])
-    @contar_products = @service_details.count
-    #@contar_products = 0
+    @service_details = ServiceDetail.all
+    @contar_products = 0
   end
 
   # GET /services/1/edit
@@ -28,6 +27,8 @@ class ServicesController < ApplicationController
     @service_details = ServiceDetail.where(:service_id => params[:id])
     @servicio = Service.where(:service_id => params[:id])
     @contar_products = @service_details.count
+    @nombre = Product.where(:product_id => params[:id]).select(:name)
+    @lista_productos = Product.joins(:services)
   end
 
   # POST /services

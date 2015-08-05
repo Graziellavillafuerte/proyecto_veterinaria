@@ -1,0 +1,228 @@
+<%= form_for @service, :html => { :class => "form-horizontal service" } do |f| %>
+   
+
+    <% if @service.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @service.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+<div class="col-md-6">
+  <div class="control-group">
+    <%= f.label :"Nombre", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%= error_span(@service[:name]) %>
+  </div>
+</div>
+
+<div class="col-md-6">
+  <div class="control-group">
+    <%= f.label :"Precio", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :price, :class => 'form-control' %>
+    </div>
+    <%= error_span(@service[:price]) %>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <div class="control-group">
+    <%= f.label :"Observación", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :observation, :class => 'form-control' %>
+    </div>
+    <%= error_span(@service[:observation]) %>
+  </div>
+</div>
+
+<!-- ############################### -->
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+<div class="col-md-12">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <strong>PRODUCTOS</strong>
+    </div>
+    
+    <div class="panel-body">
+      <div class="col-md-12">
+        <div class="row">
+        <div class="col-md-4">
+                <div class="control-group">
+                  <%= f.label :"Producto", :class => 'control-label' %>
+                <div class="controls">
+                  <select name="Producto", class="form-control input-sm" title="Producto" id="Producto">
+                    <option value="0">(Seleccione)</option>
+                     <%= options_for_select(@product) %>
+                  </select>
+                </div>
+                </div>
+        </div>
+
+        <div class="col-md-4">
+                <div class="control-group">
+                  <label>&nbsp;</label>
+                <div class="controls">
+                  <a class="btn btn-primary" title="Agregar Producto" id="AgregarProducto" 
+                  ><i class="fa fa-plus"></i>&nbsp;Agregar Producto</a>
+                </div>
+                </div>
+        </div>
+  
+        <div class="col-md-4">
+                <div class="control-group">
+                  <label>&nbsp;</label>
+                <div class="controls">
+                 <a class="btn btn-primary" title="Quitar Producto" id="QuitarProducto">
+                 <i class="fa fa-minus-circle"></i>&nbsp;Quitar Producto</a> 
+                </div>
+                </div>
+        </div>
+
+      </div>
+    </div>
+
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+<div class="row">
+  
+<div class="col-md-12">
+  <div class="table-responsive">
+    <table class="table table-bordered" id="datatable-grilla-productos">
+    <thead>	
+    <tr>
+      <th class="text-center">Id Producto</th>
+      <th class="text-center">Nombre Producto</th>
+      <th class="text-center">Quitar</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+    </tbody>
+    </table>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ############################### -->
+
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+  
+  <div class="col-md-6 col-sm-offset-4">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.submit.cancel")),
+              services_path, :class => 'btn btn-primary' %>
+  </div>
+  
+<% end %>
+
+
+
+
+
+
+
+
+
+<style>
+    #datatable-grilla-productos .classDataTable { text-align: center; font-weight: bold; }
+</style>
+
+<script type="text/javascript">
+  function obtenerTabla() {
+    var tabla = $('#datatable-grilla-productos').DataTable(
+    {
+        "bPaginate": false,  
+        "bInfo": false,  
+        "bFilter": false,
+        "aoColumns" : [
+        { sClass: "classDataTable validarCampo" },
+        { sWidth: '70%' },
+        { sClass: "classDataTable" }
+        ]  
+    });
+    
+    return tabla;
+  }
+  
+  function hacer_click(removeId)
+  {
+      var indice = $('#' + removeId).parent().parent().index();
+      console.log(indice);
+      $('#datatable-grilla-productos').DataTable().row(indice).remove().draw( false );
+  }
+  
+  $(document).ready(function() {
+    var tabla = obtenerTabla();
+    if (<%= @contar_products %> > 0)
+    {
+    <% @service_details.each do |service_detail| %>
+      var valprod = "<input type='hidden' name='inputprod[]' value=\'" + <%= service_detail.product_id %> + "\' />";
+        tabla.row.add(
+          [
+            valprod + <%= service_detail.product_id %>,
+            <%= service_detail.product_id %>,
+            "<a id='Quitar' onclick='javascript:hacer_click(" + <%= service_detail.product_id %> + ")'><i class='fa fa-minus-circle'></i></a>"
+          ]).draw();
+          existe = false;
+    <% end %>
+    }
+    
+    $("#AgregarProducto").on( 'click', function() {
+      var idproducto = $('#Producto option:selected').val();
+      var textproducto = $('#Producto option:selected').text();
+      var idprod = "<input type='hidden' id='" + idproducto + "' name='inputprod[]' value=\'" + idproducto + "\' />";
+    
+      if (idproducto == 0) {
+        alert("Seleccione un producto");
+      } else {
+        var existe = false;
+        $.each($('#datatable-grilla-productos tbody tr .validarCampo'), function() {
+          var valor = $(this).last().text();
+          console.log(valor + ' ' + idproducto);
+          if (idproducto === valor) {
+            existe = true;
+          } 
+        });
+        if (existe) {
+          alert('Producto existente no se puede ingresar');
+        } else {
+          tabla.row.add([ idprod + idproducto, textproducto,
+              "<a href='#' id='Quitar' onclick='javascript:hacer_click(" + idproducto + ")'><i class='fa fa-minus-circle'></i></a>"]).draw();
+        }
+      }
+    });
+    $('#datatable-grilla-productos tbody').on( 'click', 'tr', function () {
+      if ( $(this).hasClass('selected') ) {
+           $(this).removeClass('selected');
+      } else {
+          tabla.$('tr.selected').removeClass('selected');
+          $(this).addClass('selected');
+      }
+    });
+    
+    $('#QuitarProducto').on( 'click', function () {
+      if ($('#datatable-grilla-productos tbody tr').hasClass('selected')) {
+        tabla.row('.selected').remove().draw( false );
+      } else {
+        alert('Elija un producto para quitar');
+      }
+    });
+});
+</script>
