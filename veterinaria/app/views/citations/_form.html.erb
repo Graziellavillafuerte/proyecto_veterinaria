@@ -19,7 +19,7 @@
   <div class="col-md-4">
     <div class="control-group">
       <%= f.label :"Fecha", :class => 'control-label' %>
-      <input class="form-control" placeholder="" type="date" title="Fecha" name="citation[:date]" id="fecha">
+      <input class="form-control" placeholder="" type="date" title="Fecha" name="citation[date]" id="fecha">
       <span class="add-on"><i class="icon-th"></i></span>
     </div>
   </div>
@@ -27,11 +27,11 @@
 <div class="col-md-4">
   <div class="control-group">
     <%= f.label :"Hora", :class => 'control-label' %>
-      <div class="input-group clockpicker">
-         <input class="form-control" type="clock" name="citation[:time]" id="hora" %>
-          <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-
-      </div>
+    <div class="input-group">
+      <%= f.text_field :time, :class => 'form-control' %> 
+      <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+    </div>
+    <%= error_span(@citation[:time]) %>
   </div>
 </div>
 
@@ -40,9 +40,9 @@
   <div class="control-group">
     <%= f.label :"Cliente", :class => 'control-label' %>
     <div class="controls">
-      <%= f.select(:client_id, @clients, {:include_blank =>"Seleccione"}, {:class => 'form-control'}) %>
+      <%= f.select(:client_id, @clients, {:include_blank => "(Seleccione)"}, {:class => 'form-control'}) %>
     </div>
-    <%= error_span(@citation[:patient_id]) %>
+    <%= error_span(@citation[:client_id]) %>
   </div>
 </div>
 
@@ -50,7 +50,7 @@
   <div class="control-group">
     <%= f.label :"Observaciones", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_area :observation, :class => 'form-control', :type => 'number'%>
+      <%= f.text_area :observation, :class => 'form-control' %>
     </div>
     <%= error_span(@citation[:observation]) %>
   </div>
@@ -77,13 +77,13 @@
                                 <div class="row">
                                     <div class="col-md-6 col-md-offset-3">
                                         <div aria-label="First group" role="group" class="btn-group">
-                                            <button class="btn btn-default" type="button">08:00</button>
-                                            <button class="btn btn-default" type="button">09:00</button>
-                                            <button class="btn btn-default" type="button">10:00</button>
-                                            <button class="btn btn-default" type="button">11:00</button>
-                                            <button class="btn btn-default" type="button">12:00</button>
-                                            <button class="btn btn-default" type="button">13:00</button>
-                                            <button class="btn btn-default" type="button">14:00</button>
+                                            <button id="horita" name="timer" value="8" class="btn btn-default" type="button">08:00</button>
+                                            <button id="horita" name="timer" value="9" class="btn btn-default" type="button">09:00</button>
+                                            <button name="timer" value="10" class="btn btn-default" type="button">10:00</button>
+                                            <button name="timer" value="11" class="btn btn-default" type="button">11:00</button>
+                                            <button name="timer" value="12" class="btn btn-default" type="button">12:00</button>
+                                            <button name="timer" value="13" class="btn btn-default" type="button">13:00</button>
+                                            <button name="timer" value="14" class="btn btn-default" type="button">14:00</button>
                                         </div>
                                     </div>
                                 </div>
@@ -162,7 +162,7 @@
     <table class="table table-bordered" id="datatable-grilla-servicios">
     <thead>	
     <tr>
-      <th class="text-center">C&oacute;d. Servicio</th>
+      <th class="text-center">Id Servicio</th>
       <th class="text-center">Nombre Servicio</th>
       <th class="text-center">Cantidad</th>
       <th class="text-center">Quitar</th>
@@ -192,16 +192,32 @@
             
 <% end %>
 
+
+
+
+
+
+
+
+
+
+
+<style>
+    #datatable-grilla-servicios .classDataTable { text-align: center; font-weight: bold; }
+</style>
+
 <script type="text/javascript">
+            
   function obtenerTabla() {
-    var tabla = $('#datatable-grilla-productos').DataTable(
+    var tabla = $('#datatable-grilla-servicios').DataTable(
     {
         "bPaginate": false,  
         "bInfo": false,  
         "bFilter": false,
         "aoColumns" : [
-        { sClass: "classDataTable" },
-        { sWidth: '70%' },
+        { sClass: "classDataTable validarCampo" },
+        { sWidth: '55%' },
+        { sWidth: '15%' },
         { sClass: "classDataTable" }
         ]  
     });
@@ -213,41 +229,76 @@
   {
       var indice = $('#' + removeId).parent().parent().index();
       console.log(indice);
-      $('#datatable-grilla-productos').DataTable().row(indice).remove().draw( false );
+      $('#datatable-grilla-servicios').DataTable().row(indice).remove().draw( false );
   }
   
   $(document).ready(function() {
     var tabla = obtenerTabla();
+    $('#Disponibilidad').hide();
+  
+    $("#VerDisponibilidad").click(function(){
+      $('#Disponibilidad').removeAttr('style');
+      $("#VerDisponibilidad").hide();
+      $("#OcultarDisponibilidad").show();
+    });
+    $("#OcultarDisponibilidad").click(function(){
+      $('#Disponibilidad').attr('style', 'display: none');
+      $("#VerDisponibilidad").show();
+      $("#OcultarDisponibilidad").hide();
+    });
+  
     
-    <% @service_details.each do |service_detail| %>
-      var valprod = "<input type='hidden' name='inputprod[]' value=\'" + <%= service_detail.service_id %> + "\' />";
-        tabla.row.add(
-          [
-            valprod + <%= service_detail.service_id %>,
-            <%= service_detail.service_id %>,
-            "<a id='Quitar' onclick='hacer_click(\"" + <%= service_detail.service_id %> + "\")'><i class='fa fa-minus-circle'></i></a>"
-          ]).draw();
-          existe = false;
-    <% end %>
     
-    $("#AgregarProducto").on( 'click', function() {
-      var idservicio = $('#Producto option:selected').val();
-      var textservicio = $('#Producto option:selected').text();
-      var idserv = "<input type='hidden' id='" + idservicio + "' name='inputprod[]' value=\'" + idservicio + "\' />";
+    if (<%= @contar_services %> > 0)
+    {
+      <% @citation_details.each do |citation_detail| %>
+        var valserv = "<input type='hidden' name='inputserv[]' value=\'" + <%= citation_detail.service_id %> + "\' />";
+        //var cantidad = $("#Cantidad").val();
+          tabla.row.add(
+            [
+              valserv + <%= citation_detail.service_id %>,
+              "<%= citation_detail.service_id %>",
+              $('#Cantidad').val(),
+              "<a href='javascript.void(0)' id='Quitar' onclick='hacer_click(\"" + <%= citation_detail.service_id %> + "\")'><i class='fa fa-minus-circle'></i></a>"
+            ]).draw();
+            existe = false;
+      <% end %>
+    }
+    
+    $("#AgregarServicio").on( 'click', function() {
+      var idservicio = $('#ComboServicios option:selected').val();
+      var textservicio = $('#ComboServicios option:selected').text();
+      var cantidad = $('#Cantidad').val();
+      var idserv = "<input type='hidden' id='" + idservicio + "' name='inputserv[]' value=\'" + idservicio + "\' />";
     
       if (idservicio == 0) {
-        alert("Seleccione un producto");
-      } else {
-        tabla.row.add(
-          [
-          idprod + idproducto,
-          textproducto,
-          "<a id='Quitar' onclick='javascript:hacer_click(" + idproducto + ")'><i class='fa fa-minus-circle'></i></a>"
-          ]).draw();
-          existe = false;
+        alert("Seleccione un servicio");
+      } 
+      else {
+        existe = false;
+        $.each($('#datatable-grilla-servicios tbody tr .validarCampo'), function() {
+          var valor = $(this).last().text();
+          console.log(valor + ' ' + idservicio);
+          if (idservicio === valor) {
+              existe = true;
+          } 
+        });
+          if (existe) {
+            alert('Servicio existente no se puede ingresar');
+          } 
+          else {
+            tabla.row.add(
+              [
+              idserv + idservicio,
+              textservicio,
+              cantidad,
+              "<a href='javascript.void(0)' id='Quitar' onclick='javascript:hacer_click(" + idservicio + ")'><i class='fa fa-minus-circle'></i></a>"
+              ]).draw();
+          }
       }
     });
-    $('#datatable-grilla-productos tbody').on( 'click', 'tr', function () {
+    
+    $('#datatable-grilla-servicios tbody').on( 'click', 'tr', function () {
       if ( $(this).hasClass('selected') ) {
            $(this).removeClass('selected');
       } else {
@@ -256,12 +307,28 @@
       }
     });
     
-    $('#QuitarProducto').on( 'click', function () {
-      if ($('#datatable-grilla-productos tbody tr').hasClass('selected')) {
+    $('#QuitarServicio').on( 'click', function () {
+      if ($('#datatable-grilla-servicios tbody tr').hasClass('selected')) {
         tabla.row('.selected').remove().draw( false );
       } else {
-        alert('Elija un producto para quitar');
+        alert('Elija un servicio para quitar');
       }
     });
+    
+  $('#horita').click(function()
+       {
+        var selectedItems= new Array();
+        var indice=0;
+      $('[name=timer').each(function()
+        {
+            if( $(this).attr('click') )
+            {                           
+                selectedItems[indice] = $(this).val();//El indice inicial cera 0
+                indice++; //paso a incrementar el indice en 1
+            }
+        });
+        alert(selectedItems);
+    });
+	  
 });
 </script>

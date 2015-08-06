@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150801022739) do
+ActiveRecord::Schema.define(version: 20150805222038) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -37,9 +37,9 @@ ActiveRecord::Schema.define(version: 20150801022739) do
     t.time     "time"
     t.text     "observation", limit: 65535
     t.integer  "client_id",   limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "state",       limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "state",       limit: 4,     default: 1
   end
 
   add_index "citations", ["client_id"], name: "index_citations_on_client_id", using: :btree

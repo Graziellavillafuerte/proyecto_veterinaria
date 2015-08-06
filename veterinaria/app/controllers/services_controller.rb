@@ -28,6 +28,7 @@ class ServicesController < ApplicationController
     @servicio = Service.where(:service_id => params[:id])
     @contar_products = @service_details.count
     @lista_productos = Product.joins(:services)
+    @productos = params[:inputprod]
   end
 
   # POST /services

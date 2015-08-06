@@ -14,6 +14,8 @@
 class CitationDetail < ActiveRecord::Base
   belongs_to :citation
   belongs_to :client
+  belongs_to :service
   
   delegate :name, :to => :service, :prefix => true
+  delegate :name, :to => :client, :prefix => true
 end

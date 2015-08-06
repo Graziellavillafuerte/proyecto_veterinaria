@@ -16,17 +16,19 @@ class CitationsController < ApplicationController
   # GET /citations/new
   def new
     @citation = Citation.new
-    @clients = Client.all.map{|p| [ p.name, p.id ] }
+    @clients = Client.all.map{|p| [ (p.name + " " + p.firstlastname + " " + p.secondlastname), p.id ] }
     @services_combo = Service.all.map{|p| [ p.name, p.id ] }
+    @citation_details = CitationDetail.all
     @contar_services = 0
   end
 
   # GET /citations/1/edit
   def edit
-    @services = Service.all.map{|p| [ p.name, p.id ]}
-    @citation_details_id = CitationDetail.where(:service_id => params[:id])
+    @services_combo = Service.all.map{|p| [ p.name, p.id ] }
+    @clients = Client.all.map{|p| [ (p.name + " " + p.firstlastname + " " + p.secondlastname), p.id ] }
+    @citation_details = CitationDetail.where(:service_id => params[:id])
     #@citation = Citation.where(:citation_id => params[:id])
-    @contar_services = @citation_details_id.count
+    @contar_services = @citation_details.count
   end
 
   # POST /citations
@@ -45,6 +47,9 @@ class CitationsController < ApplicationController
         format.html { redirect_to @citation, notice: 'Citation was successfully created.' }
         format.json { render :show, status: :created, location: @citation }
       else
+        @clients = Client.all.map{|p| [ p.name, p.id ] }
+        @services_combo = Service.all.map{|p| [ p.name, p.id ] }
+        @citation_details = CitationDetail.where(:service_id => params[:id])
         format.html { render :new }
         format.json { render json: @citation.errors, status: :unprocessable_entity }
       end
@@ -95,6 +100,6 @@ class CitationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def citation_params
-      params.require(:citation).permit(:date, :time, :observation, :state, :service_id)
+      params.require(:citation).permit(:date, :time, :observation, :state, :service_id, :client_id)
     end
 end

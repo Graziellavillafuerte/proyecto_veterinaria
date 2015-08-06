@@ -1,33 +1,39 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Citation Details</h1>
-
-<table>
+<%- model_class = CitationDetail -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped table-bordered">
   <thead>
     <tr>
-      <th>Quantity</th>
-      <th>Amount</th>
-      <th>Citation</th>
-      <th>Client</th>
-      <th colspan="3"></th>
+      <th style="text-align: center"><%= model_class.human_attribute_name(:id) %></th>
+      <th>Cantidad</th>
+      <th>Precio</th>
+      <th>Cita</th>
+      <th>Servicio</th>
+      <th style="text-align: center"><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @citation_details.each do |citation_detail| %>
       <tr>
+        <td align="center"><b><%= link_to citation_detail.id, citation_detail_path(citation_detail) %></b></td>
         <td><%= citation_detail.quantity %></td>
         <td><%= citation_detail.amount %></td>
-        <td><%= citation_detail.citation %></td>
-        <td><%= citation_detail.client %></td>
-        <td><%= link_to 'Show', citation_detail %></td>
-        <td><%= link_to 'Edit', edit_citation_detail_path(citation_detail) %></td>
-        <td><%= link_to 'Destroy', citation_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= citation_detail.citation_id %></td>
+        <td><%= citation_detail.service_name %></td>
+        <td align="center">
+          <%= link_to "<i class='fa fa-eye'></i>".html_safe, citation_detail_path(citation_detail) %>
+          <%= link_to "<i class='fa fa-pencil'></i>".html_safe, edit_citation_detail_path(citation_detail) %>
+          <%= link_to "<i class='fa fa-trash-o'></i>".html_safe,
+                      citation_detail_path(citation_detail),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Citation detail', new_citation_detail_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_citation_detail_path,
+            :class => 'btn btn-primary' %>

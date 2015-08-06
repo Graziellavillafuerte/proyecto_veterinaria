@@ -173,7 +173,7 @@
    if (<%= @contar_products %> > 0)
     {
     <% @service_details.each do |service_detail| %>
-      var valprod = "<input type='hidden' name='inputprod[]' value=\'" + <%= service_detail.product_id %> + "\' />";
+      var valprod = "<input type='hidden' id='" + <%= service_detail.product_id %> + "' name='inputprod[]' value=\'" + <%= service_detail.product_id %> + "\' />";
          tabla.row.add(
           [
             valprod + <%= service_detail.product_id %>,

@@ -1,24 +1,123 @@
 <%- model_class = Citation -%>
-<div class="row"></div>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h3><b><%=t '.title', :default => "VER CITA" %></b></h3>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong>Fecha:</strong></dt>
-  <dd><%= @citation.date %></dd>
-  <dt><strong>Hora:</strong></dt>
-  <dd><%= @citation.time %></dd>
-  <dt><strong>Observaciones:</strong></dt>
-  <dd><%= @citation.observation %></dd>
-</dl>
+<%= form_for @citation, :html => { :class => "form-horizontal citation" } do |f| %>
 
-<%= link_to t('.back', :default => t("helper.submit.back")),
+    <% if @citation.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@citation.errors.count, "error") %> prohibited this citation from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @citation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+  
+  <div class="col-md-4">
+    <div class="control-group">
+      <%= f.label :"Fecha", :class => 'control-label' %>
+      <div class="input-group">
+          <%= f.text_field :date, :class => 'form-control' , :readonly => 'readonly' %> 
+         <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+    </div>
+  </div>
+  </div>
+
+<div class="col-md-4">
+  <div class="control-group">
+    <%= f.label :"Hora", :class => 'control-label' %>
+    <div class="input-group">
+      <%= f.text_field :time, :class => 'form-control' , :readonly => 'readonly' %> 
+      <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-4">
+  <div class="control-group">
+    <%= f.label :"Cliente", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :client_id, :class => 'form-control', :readonly => 'readonly' %>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-12">
+  <div class="control-group">
+    <%= f.label :"Observaciones", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :observation, :class => 'form-control' , :readonly => 'readonly' %>
+    </div>
+    <%= error_span(@citation[:observation]) %>
+  </div>
+</div>
+
+<!-- ############################### -->
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong>SERVICIOS</strong>
+    </div>
+    
+    <div class="panel-body">
+      <div class="col-md-12">
+
+
+<table class="table table-bordered table-hover"  style="padding-left: 20">
+  <thead>
+    <tr>
+      <th style="text-align: center">Id Servicio</th>
+      <th style="text-align: center">Nombre Servicio</th>
+      <th style="text-align: center">Cantidad</th>
+      <th style="text-align: center">Ver</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @citation_details.each do |citation_detail| %>
+      <tr>
+        <td align="center"><b><%= citation_detail.service.id %></b></td>
+        <td><%= citation_detail.service_name %></td>
+        <td><%= citation_detail.quantity %></td>
+        <td align="center">
+          <%= link_to "<i class='fa fa-eye'></i>".html_safe,
+                      citation_detail_path(citation_detail) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- ############################### -->
+
+
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+<div class="col-md-6 col-md-offset-4">
+
+<%= link_to t('.back', :default => t("helpers.submit.back")),
               citations_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helper.submit.edit")),
+<%= link_to t('.edit', :default => t("helpers.submit.edit")),
               edit_citation_path(@citation), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helper.submit.destroy")),
+<%= link_to t('.destroy', :default => t("helpers.submit.destroy")),
               citation_path(@citation),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-primary' %>
+              
+</div>
+<% end %>

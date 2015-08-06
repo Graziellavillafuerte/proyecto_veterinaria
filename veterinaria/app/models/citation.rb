@@ -21,10 +21,10 @@ class Citation < ActiveRecord::Base
     validates_presence_of :date, :message => '^ Seleccione una fecha'
     validates_presence_of :time, :message => '^ Seleccione una hora'
     
-    delegate :name, :to => :patient, :prefix => true
-    delegate :name, :to => :service, :prefix => true
-    
-    def new
-      #this will also fix the error you see, although it's fundamentally incorrect
-   end
+    delegate :name, :to => :client, :prefix => true
+    delegate :firstlastname, :to => :client, :prefix => true
+    delegate :secondlastname, :to => :client, :prefix => true
+
+    #default_scope { where(state: 'Si') }
+   
 end

@@ -62,7 +62,8 @@
         <td align="center"><%= citation.id %></td>
         <td><%= citation.date %></td>
         <td><%= citation.time %></td>
-        <td align="center"></td>
+        <td><%= citation.client_name %> <%= citation.client_firstlastname %> <%= citation.client_secondlastname %></td>
+        <td align="center"><%= citation.state %></td>
         <td align="center">
            <%= link_to "<i class='fa fa-eye'></i>".html_safe,
                       citation_path(citation) %>
