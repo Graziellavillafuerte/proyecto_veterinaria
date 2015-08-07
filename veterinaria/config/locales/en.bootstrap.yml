@@ -17,6 +17,7 @@ en:
       new: "NUEVO"
       edit: "Editar"
       quitar: "¿Está seguro de quitar?"
+      anular: "¿Está seguro de anular?"
     titles:
       edit: "EDITAR %{model}"
       save: "GUARDAR %{model}"

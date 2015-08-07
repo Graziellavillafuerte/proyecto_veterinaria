@@ -81,7 +81,10 @@ class ServicesController < ApplicationController
   # DELETE /services/1
   # DELETE /services/1.json
   def destroy
-    ServiceDetail.delete_all(:service_id => params[:id])
+    #@servicio_detail = ServiceDetail.where(:service_id => params[:id])
+    #if @servicio_detail.count > 0
+      ServiceDetail.delete_all(:service_id => params[:id])  
+    #end
     @service.destroy
     respond_to do |format|
       format.html { redirect_to services_url, notice: 'Service was successfully destroyed.' }

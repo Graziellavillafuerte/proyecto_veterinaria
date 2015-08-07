@@ -34,7 +34,7 @@
   <div class="control-group">
     <%= f.label :"Hora", :class => 'control-label' %>
     <div class="input-group">
-      <%= f.text_field :time, :class => 'form-control' , :readonly => 'readonly' %> 
+      <%= f.text_field :time, :value => f.object.time.strftime('%H:%M'), :class => 'form-control' , :readonly => 'readonly' %> 
       <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
     </div>
   </div>
@@ -45,7 +45,7 @@
   <div class="control-group">
     <%= f.label :"Cliente", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :client_id, :class => 'form-control', :readonly => 'readonly' %>
+      <%= f.text_field :client_name, :class => 'form-control', :readonly => 'readonly' %>
     </div>
   </div>
 </div>
@@ -92,7 +92,7 @@
         <td><%= citation_detail.quantity %></td>
         <td align="center">
           <%= link_to "<i class='fa fa-eye'></i>".html_safe,
-                      citation_detail_path(citation_detail) %>
+                      service_path(citation_detail.service.id) %>
         </td>
       </tr>
     <% end %>
@@ -110,9 +110,9 @@
 <div class="col-md-6 col-md-offset-4">
 
 <%= link_to t('.back', :default => t("helpers.submit.back")),
-              citations_path, :class => 'btn btn-default'  %>
+              citations_path, :class => 'btn btn-primary'  %>
 <%= link_to t('.edit', :default => t("helpers.submit.edit")),
-              edit_citation_path(@citation), :class => 'btn btn-default' %>
+              edit_citation_path(@citation), :class => 'btn btn-primary' %>
 <%= link_to t('.destroy', :default => t("helpers.submit.destroy")),
               citation_path(@citation),
               :method => 'delete',

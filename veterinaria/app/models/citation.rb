@@ -25,6 +25,6 @@ class Citation < ActiveRecord::Base
     delegate :firstlastname, :to => :client, :prefix => true
     delegate :secondlastname, :to => :client, :prefix => true
 
-    #default_scope { where(state: 'Si') }
+    scope :citas_hoy, -> { where("date = ?") }
    
 end

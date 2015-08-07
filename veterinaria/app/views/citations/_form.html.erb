@@ -19,7 +19,11 @@
   <div class="col-md-4">
     <div class="control-group">
       <%= f.label :"Fecha", :class => 'control-label' %>
-      <input class="form-control" placeholder="" type="date" title="Fecha" name="citation[date]" id="fecha">
+      <input class="form-control" placeholder="" type="date" title="Fecha" name="citation[date]" id="fecha"
+      <% if f.object.date.present? %>
+        value="<%= f.object.date  %>"
+      <% end %>
+      >
       <span class="add-on"><i class="icon-th"></i></span>
     </div>
   </div>
@@ -28,7 +32,11 @@
   <div class="control-group">
     <%= f.label :"Hora", :class => 'control-label' %>
     <div class="input-group">
-      <%= f.text_field :time, :class => 'form-control' %> 
+        <% if f.object.time.present? %>
+        <%= f.text_field :time, :value => f.object.time.strftime('%H:%M'), :class => 'form-control', :readonly => 'readonly'%> 
+      <% else %>
+        <%= f.text_field :time, :class => 'form-control', :readonly => 'readonly' %> 
+      <% end %>
       <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
     </div>
     <%= error_span(@citation[:time]) %>
@@ -75,28 +83,28 @@
                             </div>
                             <div class="panel-body"> 
                                 <div class="row">
-                                    <div class="col-md-6 col-md-offset-3">
+                                    <div class="col-md-7 col-md-offset-3">
                                         <div aria-label="First group" role="group" class="btn-group">
-                                            <button id="horita" name="timer" value="8" class="btn btn-default" type="button">08:00</button>
-                                            <button id="horita" name="timer" value="9" class="btn btn-default" type="button">09:00</button>
-                                            <button name="timer" value="10" class="btn btn-default" type="button">10:00</button>
-                                            <button name="timer" value="11" class="btn btn-default" type="button">11:00</button>
-                                            <button name="timer" value="12" class="btn btn-default" type="button">12:00</button>
-                                            <button name="timer" value="13" class="btn btn-default" type="button">13:00</button>
-                                            <button name="timer" value="14" class="btn btn-default" type="button">14:00</button>
+                                            <button id="time8" class="btn btn-default" type="button" onclick="javascript:pintar(this)">08:00</button>
+                                            <button id="time9" class="btn btn-default" type="button" onclick="javascript:pintar(this)">09:00</button>
+                                            <button id="time10" class="btn btn-default" type="button" onclick="javascript:pintar(this)">10:00</button>
+                                            <button id="time11" class="btn btn-default" type="button" onclick="javascript:pintar(this)">11:00</button>
+                                            <button id="time12" class="btn btn-default" type="button" onclick="javascript:pintar(this)">12:00</button>
+                                            <button id="time13" class="btn btn-default" type="button" onclick="javascript:pintar(this)">13:00</button>
+                                            <button id="time14" class="btn btn-default" type="button" onclick="javascript:pintar(this)">14:00</button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6 col-md-offset-3">
+                                    <div class="col-md-7 col-md-offset-3">
                                         <div aria-label="First group" role="group" class="btn-group">
-                                            <button class="btn btn-default" type="button">15:00</button>
-                                            <button class="btn btn-default" type="button">16:00</button>
-                                            <button class="btn btn-default" type="button">17:00</button>
-                                            <button class="btn btn-default" type="button">18:00</button>
-                                            <button class="btn btn-default" type="button">19:00</button>
-                                            <button class="btn btn-default" type="button">20:00</button>
-                                            <button class="btn btn-default" type="button">21:00</button>
+                                            <button id="time15" class="btn btn-default" type="button" onclick="javascript:pintar(this)">15:00</button>
+                                            <button id="time16" class="btn btn-default" type="button" onclick="javascript:pintar(this)">16:00</button>
+                                            <button id="time17" class="btn btn-default" type="button" onclick="javascript:pintar(this)">17:00</button>
+                                            <button id="time18" class="btn btn-default" type="button" onclick="javascript:pintar(this)">18:00</button>
+                                            <button id="time19" class="btn btn-default" type="button" onclick="javascript:pintar(this)">19:00</button>
+                                            <button id="time20" class="btn btn-default" type="button" onclick="javascript:pintar(this)">20:00</button>
+                                            <button id="time21" class="btn btn-default" type="button" onclick="javascript:pintar(this)">21:00</button>
                                         </div>
                                     </div>
                                 </div>
@@ -241,34 +249,37 @@
       $("#VerDisponibilidad").hide();
       $("#OcultarDisponibilidad").show();
     });
+    
     $("#OcultarDisponibilidad").click(function(){
       $('#Disponibilidad').attr('style', 'display: none');
       $("#VerDisponibilidad").show();
       $("#OcultarDisponibilidad").hide();
     });
   
-    
-    
     if (<%= @contar_services %> > 0)
     {
       <% @citation_details.each do |citation_detail| %>
-        var valserv = "<input type='hidden' name='inputserv[]' value=\'" + <%= citation_detail.service_id %> + "\' />";
+        var valserv = "<input type='hidden' id='<%= citation_detail.service_id %>' name='inputserv[]' value=\'" + <%= citation_detail.service_id %> + "\' />";
+        var cantidad = "<input type='hidden' name='inputcantidad[]' value=\'" + <%= citation_detail.quantity %> + "\' />";
         //var cantidad = $("#Cantidad").val();
           tabla.row.add(
             [
               valserv + <%= citation_detail.service_id %>,
-              "<%= citation_detail.service_id %>",
-              $('#Cantidad').val(),
-              "<a href='javascript.void(0)' id='Quitar' onclick='hacer_click(\"" + <%= citation_detail.service_id %> + "\")'><i class='fa fa-minus-circle'></i></a>"
+              "<%= citation_detail.service_name %>",
+              cantidad + "<%= citation_detail.quantity %>",
+              "<a href='javascript:void(0)' id='Quitar' onclick='hacer_click(\"" + <%= citation_detail.service_id %> + "\")'><i class='fa fa-minus-circle'></i></a>"
             ]).draw();
             existe = false;
       <% end %>
     }
     
+
+    
     $("#AgregarServicio").on( 'click', function() {
+      
       var idservicio = $('#ComboServicios option:selected').val();
       var textservicio = $('#ComboServicios option:selected').text();
-      var cantidad = $('#Cantidad').val();
+      var cantidad = "<input type='hidden' name='inputcantidad[]' value=\'" + $('#Cantidad').val() + "\' />";
       var idserv = "<input type='hidden' id='" + idservicio + "' name='inputserv[]' value=\'" + idservicio + "\' />";
     
       if (idservicio == 0) {
@@ -291,8 +302,8 @@
               [
               idserv + idservicio,
               textservicio,
-              cantidad,
-              "<a href='javascript.void(0)' id='Quitar' onclick='javascript:hacer_click(" + idservicio + ")'><i class='fa fa-minus-circle'></i></a>"
+              cantidad + $('#Cantidad').val(),
+              "<a href='javascript:void(0)' id='Quitar' onclick='javascript:hacer_click(" + idservicio + ")'><i class='fa fa-minus-circle'></i></a>"
               ]).draw();
           }
       }
@@ -315,20 +326,12 @@
       }
     });
     
-  $('#horita').click(function()
-       {
-        var selectedItems= new Array();
-        var indice=0;
-      $('[name=timer').each(function()
-        {
-            if( $(this).attr('click') )
-            {                           
-                selectedItems[indice] = $(this).val();//El indice inicial cera 0
-                indice++; //paso a incrementar el indice en 1
-            }
-        });
-        alert(selectedItems);
-    });
-	  
 });
+
+
+  function pintar(button)
+  {
+    $('#citation_time').val($('#'+ button.id).last().text());
+  }
+  
 </script>

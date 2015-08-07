@@ -24,7 +24,5 @@ module Veterinaria
     config.active_record.raise_in_transactional_callbacks = true
     config.time_zone = "Lima"
     
-    config.active_job.queue_adapter = :delayed_job
-    config.action_mailer.delivery_method = :sendmail
   end
 end

@@ -4,15 +4,49 @@
 </div>
 
 
+<div id="calendar">
+
+  <h3 id="month"><b>
+    <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m-01") %>
+    <%= h @date.strftime("%B %Y") %>
+    <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m-01") %>
+  </b></h3>
+  
+    <%= calendar_for(@citations, :year => @date.year, :month => @date.month) do |t| %>
+    <%= t.head('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado')%>
+    <%= t.day(:day_method => :date) do |day, citations| %>
+          <% if citations.nil? %>
+            <%= day.cweek %>
+          <% else %>
+            <%= day.day %>
+            <ul>
+              <% citations.each do |citation| %>
+                <li><%= link_to citation.client_name + ' ' + citation.client_firstlastname + ' -  ' +  citation.time.strftime('%H:%M'), citation %></li>
+              <% end %>
+            </ul>
+          <% end %>
+    <% end %>
+  <% end %>
+
+
+</div>
+
+  
+<br/><br/>
+
+
+
+
+
+
 <div class="col-md-3">
    <div class="form-group">
     <label>Estado:</label>
-    
-    <select name="citation[state]", class="form-control input-sm" title="Estado">
-      <option selected value="1">(Seleccione)</option>
-      <option value="2">Pendiente</option>
-      <option value="3">Atendida</option>
-      <option value="4">Anulada</option>
+    <select name="estado", class="form-control input-sm" title="Estado">
+      <option value="4">Todas</option>
+      <option value="1">Pendiente</option>
+      <option value="2">Atendida</option>
+      <option value="3">Anulada</option>
     </select>
     <span class="help-block"></span>
   </div>
@@ -21,7 +55,7 @@
 <div class="col-md-3">
   <div class="form-group">
     <label>Fecha Inicio</label>
-      <input class="form-control input-sm" placeholder="" type="date" title="Fecha Inicio" name="citation[fecha]" id="fecha">
+      <input class="form-control input-sm" placeholder="" type="date" value="<%= Time.now.strftime('%Y-%m-%d') %>" name="fechaIni">
       <span class="add-on"><i class="icon-th"></i></span>
 
   </div>
@@ -30,7 +64,7 @@
 <div class="col-md-3">
   <div class="form-group">
     <label>Fecha Fin</label>
-      <input class="form-control input-sm" placeholder="" type="date" title="Fecha Inicio" name="citation[fecha]" id="fecha">
+      <input class="form-control input-sm" placeholder="" type="date" value="<%= Time.now.strftime('%Y-%m-%d') %>" name="fechaFin">
       <span class="add-on"><i class="icon-th"></i></span>
   </div>
 </div>
@@ -57,13 +91,21 @@
     </tr>
   </thead>
   <tbody>
-    <% @citations.each do |citation| %>
+    <% @citations_lista.each do |citation| %>
       <tr>
-        <td align="center"><%= citation.id %></td>
-        <td><%= citation.date %></td>
-        <td><%= citation.time %></td>
+        <td align="center"><b><%= citation.id %></b></td>
+        <td align="center"><%= citation.date %></td>
+        <td align="center"><%= citation.time.strftime('%H:%M') %></td>
         <td><%= citation.client_name %> <%= citation.client_firstlastname %> <%= citation.client_secondlastname %></td>
-        <td align="center"><%= citation.state %></td>
+        <td align="center">
+          <% case citation.state %>
+            <% when 1 %>
+              Pendiente
+            <% when 2 %>
+              Atendida
+            <% when 3 %>
+              Anulada
+          <% end %>
         <td align="center">
            <%= link_to "<i class='fa fa-eye'></i>".html_safe,
                       citation_path(citation) %>
@@ -71,10 +113,13 @@
           <%= link_to "<i class='fa fa-pencil'></i>".html_safe,
                       edit_citation_path(citation) %>
                       
-          <%= link_to "<i class='fa fa-times'></i>".html_safe,
+           <%= link_to "<i class='fa fa-times'></i>".html_safe,
                       citation_path(citation),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '¿Está seguro de anular?')) } %>
+                      :method => :update_state,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.anular", :default => '¿Está seguro de anular?')) } %>
+          
+          <%= link_to "<i class='fa fa-file-pdf-o'></i>".html_safe,
+                      citation_path(citation.id, :format => "pdf") %>
         </td>
       </tr>
     <% end %>
@@ -89,4 +134,3 @@
             new_citation_path,
             :class => 'btn btn-primary' %>
 </div>
-
