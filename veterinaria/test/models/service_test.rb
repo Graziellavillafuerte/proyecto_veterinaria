@@ -4,7 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  name        :string(60)
-#  price       :decimal(10, )
+#  price       :decimal(6, 2)
 #  observation :text(65535)
 #  citation_id :integer
 #  created_at  :datetime         not null

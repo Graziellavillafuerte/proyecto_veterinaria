@@ -6,10 +6,10 @@
 #  date        :date
 #  time        :time
 #  observation :text(65535)
+#  client_id   :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  state       :integer
-#  client_id   :integer
+#  state       :integer          default(1)
 #
 
 class Citation < ActiveRecord::Base
@@ -17,6 +17,7 @@ class Citation < ActiveRecord::Base
     belongs_to :client
     has_many :citation_details
     has_many :services, :through => :citation_details
+    has_one :service_order
     
     validates_presence_of :date, :message => '^ Seleccione una fecha'
     validates_presence_of :time, :message => '^ Seleccione una hora'
@@ -24,6 +25,7 @@ class Citation < ActiveRecord::Base
     delegate :name, :to => :client, :prefix => true
     delegate :firstlastname, :to => :client, :prefix => true
     delegate :secondlastname, :to => :client, :prefix => true
+    delegate :email, :to => :client, :prefix => true
 
     scope :citas_hoy, -> { where("date = ?") }
    

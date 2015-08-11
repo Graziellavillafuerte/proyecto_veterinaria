@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
+  resources :reminders
+  resources :service_order_details
+  resources :service_orders
+  resources :service_order_details
+  resources :service_orders
   devise_for :users, :controllers => { :sessions => "sessions", :registrations => "registrations", :passwords => "passwords" }
   resources :citation_details
-  resources :service_details
   resources :products
   resources :unit_measures
   resources :services

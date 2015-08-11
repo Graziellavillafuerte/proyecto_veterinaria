@@ -50,4 +50,18 @@ Rails.application.configure do
    :authentication       => "plain",
   :enable_starttls_auto => true
   }
+  
+  
+  
+#  config.action_mailer.delivery_method = :smtp
+#  config.action_mailer.smtp_settings = {
+#   :address              => "smtp.mandrillapp.com",
+#   :port                 => 587,
+#   :user_name            => "miguelaranya@gmail.com",
+#   :password             => "FiKdlgUP1E9qVndFHv1UBg",
+#   :authentication       => "plain",
+#   :enable_starttls_auto => true
+#  }
+
+ config.action_mailer.perform_deliveries = true
 end

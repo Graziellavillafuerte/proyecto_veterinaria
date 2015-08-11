@@ -16,12 +16,12 @@ class PatientsController < ApplicationController
   # GET /patients/new
   def new
     @patient = Patient.new
-    @client = Client.all.map{|p| [ p.name << p.firstlastname << p.secondlastname, p.id ] }
+    @client = Client.all.map{|p| [ (p.name + " " + p.firstlastname + " " + p.secondlastname), p.id ] }
   end
 
   # GET /patients/1/edit
   def edit
-    @client = Client.all.map{|p| [ p.name + p.firstlastname + p.secondlastname, p.id ] }
+    @client = Client.all.map{|p| [ (p.name + " " + p.firstlastname + " " + p.secondlastname), p.id ] }
     @edad = Date.today.year
   end
 

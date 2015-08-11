@@ -89,7 +89,7 @@
       <tr>
         <td align="center"><b><%= citation_detail.service.id %></b></td>
         <td><%= citation_detail.service_name %></td>
-        <td><%= citation_detail.quantity %></td>
+        <td style="text-align: right"><%= citation_detail.quantity %></td>
         <td align="center">
           <%= link_to "<i class='fa fa-eye'></i>".html_safe,
                       service_path(citation_detail.service.id) %>

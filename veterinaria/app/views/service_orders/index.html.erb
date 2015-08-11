@@ -1,0 +1,44 @@
+<%- model_class = ServiceOrder -%>
+<div class="page-header">
+  <h3><b><%=t '.title', :default => 'ÓRDENES DE SERVICIO' %></b></h3>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th style="text-align: center">Id Orden</th>
+      <th style="text-align: center">Fecha</th>
+      <th style="text-align: center">N° Cita</th>
+      <th style="text-align: center">Cliente</th>
+      <th style="text-align: center">Importe</th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% cont = 0 %>
+    <% @service_orders.each do |service_order| %>
+      <tr>
+        <td align="center"><b><%= service_order.id %></b></td>
+        <td align="center"><%= service_order.created_at.strftime('%Y-%m-%d') %></td>
+        <td align="center"><%= service_order.fecha_order%></td>
+        <td><%= service_order.name %> <%= service_order.firstlastname %> <%= service_order.secondlastname%></td>
+        <td align="center"><%= service_order.imp_servicios + @product_join[cont].imp_productos %> </td>
+        <td>
+           <%= link_to "<i class='fa fa-eye'></i>".html_safe, service_order_path(service_order) %>
+
+           <%= link_to "<i class='fa fa-pencil'></i>".html_safe, edit_service_order_path(service_order) %>
+           <%= link_to "<i class='fa fa-trash-o'></i>".html_safe,
+                      service_order_path(service_order),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }%>
+        </td>
+      </tr>
+     <% cont += 1 %>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="rm col-md-12" style="text-align:center">
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_service_order_path,
+            :class => 'btn btn-primary' %>
+</div>

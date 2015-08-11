@@ -6,10 +6,10 @@
 #  date        :date
 #  time        :time
 #  observation :text(65535)
+#  client_id   :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  state       :integer
-#  client_id   :integer
+#  state       :integer          default(1)
 #
 
 require 'test_helper'

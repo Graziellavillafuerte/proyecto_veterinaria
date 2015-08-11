@@ -1,0 +1,123 @@
+<%- model_class = ServiceOrder -%>
+<div class="page-header">
+  <h3><b><%=t '.title', :default => 'VER ORDEN DE SERVICIO' %></b></h3>
+</div>
+
+<%= form_for @service_order, :html => { :class => "form-horizontal service_order" } do |f| %>
+
+<div class="col-md-6">
+  <div class="control-group">
+    <%= f.label :"Cliente", :class => 'control-label' %>
+    <div class="controls">
+      <input readonly='readonly' value="<%= @service_order.citation.client_name %> <%= @service_order.citation.client_firstlastname %> <%= @service_order.citation.client_secondlastname %>"
+      class='form-control'>
+      </input>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!---------------------------------------------------------------------------->
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong>SERVICIOS</strong>
+    </div>
+    
+    <div class="panel-body">
+      <div class="col-md-12">
+
+
+<table class="table table-bordered table-hover"  style="padding-left: 20" id="datatable-grilla-servicios">
+  <thead>
+    <tr>
+      <th style="text-align: center">Id Servicio</th>
+      <th style="text-align: center">Nombre Servicio</th>
+      <th style="text-align: center">Cantidad</th>
+      <th style="text-align: center">Importe S/.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @citation_details.each do |citation_detail| %>
+      <tr>
+        <td align="center"><b><%= citation_detail.service_id %></b></td>
+        <td><%= citation_detail.service_name %></td>
+        <td style="text-align: right"><%= citation_detail.quantity %></td>
+        <td style="text-align: right"><%= citation_detail.quantity * citation_detail.service_price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!---------------------------------------------------------------------------->
+
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong>PRODUCTOS</strong>
+    </div>
+    
+    <div class="panel-body">
+      <div class="col-md-12">
+
+
+<table class="table table-bordered table-hover"  style="padding-left: 20">
+  <thead>
+    <tr>
+      <th style="text-align: center">Id Producto</th>
+      <th style="text-align: center">Nombre Producto</th>
+      <th style="text-align: center">Cantidad</th>
+      <th style="text-align: center">Importe S/.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @service_order_details.each do |order_detail| %>
+      <tr>
+        <td align="center"><b><%= order_detail.product.id %></b></td>
+        <td><%= order_detail.product_name %></td>
+        <td style="text-align: right"><%= order_detail.quantity %></td>
+        <td style="text-align: right"><%= order_detail.quantity * order_detail.product_sale_price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- ############################### -->
+
+<!------------------------------------------------------------------------------------------------------------------>
+
+<div class="col-md-12" style="text-align:center">
+
+<%= link_to t('.back', :default => t("helpers.submit.back")),
+              service_orders_path, :class => 'btn btn-primary'  %>
+<%= link_to t('.edit', :default => t("helpers.submit.edit")),
+              edit_service_order_path(@service_order), :class => 'btn btn-primary' %>
+<%= link_to t('.destroy', :default => t("helpers.submit.destroy")),
+              service_order_path(@service_order),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-primary' %>
+</div>
+
+<% end %>
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+<script type="text/javascript">
+
+  
+</script>

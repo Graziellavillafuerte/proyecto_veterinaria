@@ -1,0 +1,11 @@
+<html>
+    <head></head>
+    <body>
+        
+        <h1>VETERINARIA MI MASCOTA</h1><br><br>
+        <% if (@citation) %>
+            <h3>Se ha generado la cita para : <%= @citation.client_name %> <%= @citation.client_firstlastname %> <%= @citation.client_secondlastname %></h3>
+        <% end %>
+        
+    </body>
+</html>

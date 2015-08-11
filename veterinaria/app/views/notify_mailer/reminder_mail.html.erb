@@ -1,0 +1,12 @@
+<html>
+    <head></head>
+    <body>
+        
+        <h1>VETERINARIA MI MASCOTA</h1><br><br>
+        <% if (@reminder) %>
+            <h3><%= @reminder.subject %></h3>
+            <h3>Enviado a : <%= @reminder.name %> <%= @reminder.lastname %> <%= @reminder.secondlastname %></h3>
+        <% end %>
+        
+    </body>
+</html>

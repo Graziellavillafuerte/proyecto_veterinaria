@@ -7,7 +7,9 @@ class CitationsController < ApplicationController
     @citations = Citation.where(:state => 1).order(time: :asc)
     #@estado = params[:estado]
     #@citations_lista = Citation.where(:state => @estado)
-    @citations_lista = Citation.all
+    @estado_cita = 1..3 
+    @citations_lista = Citation.all.where(:state => @estado_cita)
+    #@citations_lista = Citation.all
     @date = params[:month] ? Date.parse(params[:month]) : Date.today
     
 
@@ -19,19 +21,14 @@ class CitationsController < ApplicationController
     @citation_details = CitationDetail.where(:citation_id => params[:id])
     @clients = Client.all.map{|p| [ (p.name + " " + p.firstlastname + " " + p.secondlastname), p.id ] }
     
-    @client = Client.where(:id => @citation.client_id).select(:email)
-    @client_name = Client.where(:id => @citation.client_id).select(:name)
-    @client_id = Client.where(:id => @citation.client_id).select(:id)
     
-    
-    @data = "Un texto cualquiera"
     respond_to do |format|
       #NotifyMailer.notify_mail(@client, @client_name).deliver
       format.html
       format.pdf do
-        pdf = CitationPdf.new(@data, view_context)
-        send_data pdf.render, filename: "invoice_#{Time.now.strftime("%d/%m/%Y")}.pdf", type: "application/pdf"
-      end
+	    pdf = CitationPdf.new(@citation, view_context)
+	    send_data pdf.render, filename: "citation_#{Time.now.strftime("%d/%m/%Y")}.pdf", type: "application/pdf"
+end
     end
   end
 
@@ -70,7 +67,7 @@ class CitationsController < ApplicationController
           detalle.save
           cont +=1
         end
-        #NotifyMailer.notify_mail(@client).deliver
+        #NotifyMailer.notify_mail(@citation).deliver
         
         format.html { redirect_to @citation, notice: 'Citation was successfully created.' }
         format.json { render :show, status: :created, location: @citation }

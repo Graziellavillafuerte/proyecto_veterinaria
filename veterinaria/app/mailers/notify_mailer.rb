@@ -1,9 +1,15 @@
 class NotifyMailer <  ActionMailer::Base
-    def notify_mail(client, name)
-            #@client_name = Client.where(:id => id).select(:name)
-            @client_name = name
-            puts @client_name
-            mail to: client, subject: 'Programaciòn de Cita'
+    def notify_mail(citation)
+            @citation = citation
+            puts @citation
+            mail to: citation.client_email, subject: 'Programaciòn de Cita'
+            
+    end
+    
+    def reminder_mail(reminder)
+            @reminder = reminder
+            puts @reminder
+            mail to: reminder.email, subject: reminder.subject
             
     end
 end

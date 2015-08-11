@@ -17,8 +17,10 @@ class ServicesController < ApplicationController
   def new
     @service = Service.new
     @product = Product.all.map{|p| [ p.name, p.id ]} 
-    @service_details = ServiceDetail.all
     @contar_products = 0
+    #if  @contar_products > 0
+      @service_details = ServiceDetail.where(:service_id => params[:id])
+    #end
   end
 
   # GET /services/1/edit

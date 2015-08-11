@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150805222038) do
+ActiveRecord::Schema.define(version: 20150807214421) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -144,6 +144,18 @@ ActiveRecord::Schema.define(version: 20150805222038) do
 
   add_index "races", ["category_id"], name: "index_races_on_category_id", using: :btree
 
+  create_table "reminders", force: :cascade do |t|
+    t.datetime "date"
+    t.string   "name",           limit: 255
+    t.string   "lastname",       limit: 255
+    t.string   "secondlastname", limit: 255
+    t.string   "email",          limit: 100
+    t.integer  "state",          limit: 4
+    t.string   "subject",        limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
   create_table "service_details", force: :cascade do |t|
     t.integer  "quantity",   limit: 4
     t.integer  "product_id", limit: 4
@@ -154,6 +166,25 @@ ActiveRecord::Schema.define(version: 20150805222038) do
 
   add_index "service_details", ["product_id"], name: "index_service_details_on_product_id", using: :btree
   add_index "service_details", ["service_id"], name: "index_service_details_on_service_id", using: :btree
+
+  create_table "service_order_details", force: :cascade do |t|
+    t.integer  "quantity",         limit: 4
+    t.integer  "service_order_id", limit: 4
+    t.integer  "product_id",       limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "service_order_details", ["product_id"], name: "index_service_order_details_on_product_id", using: :btree
+  add_index "service_order_details", ["service_order_id"], name: "index_service_order_details_on_service_order_id", using: :btree
+
+  create_table "service_orders", force: :cascade do |t|
+    t.integer  "citation_id", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "service_orders", ["citation_id"], name: "index_service_orders_on_citation_id", using: :btree
 
   create_table "services", force: :cascade do |t|
     t.string   "name",        limit: 60
@@ -203,5 +234,8 @@ ActiveRecord::Schema.define(version: 20150805222038) do
   add_foreign_key "races", "categories"
   add_foreign_key "service_details", "products"
   add_foreign_key "service_details", "services"
+  add_foreign_key "service_order_details", "products"
+  add_foreign_key "service_order_details", "service_orders"
+  add_foreign_key "service_orders", "citations"
   add_foreign_key "services", "citations"
 end

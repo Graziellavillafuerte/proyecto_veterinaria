@@ -1,0 +1,2 @@
+module ServiceOrderDetailsHelper
+end

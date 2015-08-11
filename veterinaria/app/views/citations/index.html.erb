@@ -42,7 +42,7 @@
 <div class="col-md-3">
    <div class="form-group">
     <label>Estado:</label>
-    <select name="estado", class="form-control input-sm" title="Estado">
+    <select name="Estado", class="form-control input-sm" title="Estado">
       <option value="4">Todas</option>
       <option value="1">Pendiente</option>
       <option value="2">Atendida</option>
@@ -118,8 +118,7 @@
                       :method => :update_state,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.anular", :default => '¿Está seguro de anular?')) } %>
           
-          <%= link_to "<i class='fa fa-file-pdf-o'></i>".html_safe,
-                      citation_path(citation.id, :format => "pdf") %>
+          <%= link_to "<i class='fa fa-file-pdf-o'></i>".html_safe, citation_path(citation, :format => "pdf") %>
         </td>
       </tr>
     <% end %>
@@ -134,3 +133,12 @@
             new_citation_path,
             :class => 'btn btn-primary' %>
 </div>
+
+
+
+
+
+
+<script type="text/javascript">
+  alert("<%= %>")
+</script>
